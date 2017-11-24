@@ -1,5 +1,7 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react';
+import { Container } from 'semantic-ui-react'
+
 
 
 const AnyReactComponent = ({ text }) => (
@@ -19,7 +21,7 @@ export default class MapContainer extends React.Component {
 
   render() {
     return (
-      <div className="google-map-wrapper">
+      <Container fluid className="google-map-wrapper">
          <GoogleMapReact className="google-map"
          bootstrapURLKeys={{
            key: "AIzaSyA3_XMllsvSYDPbcd971r_cyzS9XbePXHk",
@@ -32,7 +34,7 @@ export default class MapContainer extends React.Component {
             lng={-73.987950}
           />
         </GoogleMapReact>
-      </div>
+      </Container>
     );
   }
 }

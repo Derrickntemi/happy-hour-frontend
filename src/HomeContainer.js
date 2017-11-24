@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
-import MapContainer from './MapContainer'
+import MapContainer from './MapContainer';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { Button, Form, Grid } from 'semantic-ui-react';
+import { fetchVenuesAction } from './actions/venues.js'
 
-
-export default class Home extends Component {
-
-  state = {
-    dayInput: '',
-    neighborhoodInput: '',
-  }
+class HomeContainer extends Component {
 
   componentDidMount = () => {
-    this.handleFetch()
-  }
-
-  handleFetch = () => {
-    fetch("http://localhost:3000/specials")
-      .then(res => res.json())
-      .then(json => console.log(json))
+    this.props.fetchVenuesAction()
   }
 
   handleInputDayChange = (event) => {
@@ -32,14 +24,35 @@ export default class Home extends Component {
   }
 
   render() {
+    console.log("this.props", this.props.venues)
     return (
-      <div className="form-wrapper">
-        <form className="search-form-wrapper" onSubmit={this.handleFetch}>
-          <input type="text" placeholder="Day" onChange={this.handleInputDayChange}/>
-          <input type="text" placeholder="Neighborhood" onChange={this.handleInputNeighborhoodChange}/>
-          <button type="submit" >Search</button>
-        </form>
-      </div>
+      <Grid className="form-wrapper" columns={3} divided>
+        <MapContainer />
+        <Form>
+          <Form.Field className="search-form-wrapper" onSubmit={this.handleFetch}>
+            <input type="text" placeholder="Day" onChange={this.handleInputDayChange}/>
+            <input type="text" placeholder="Neighborhood" onChange={this.handleInputNeighborhoodChange}/>
+            <Button primary type="submit" >Search</Button >
+          </Form.Field>
+        </Form>
+      </Grid>
     );
   }
 }
+
+function mapStateToProps(state){
+  return ({
+    venues: state.venues,
+    isLoading: state.isLoading
+  })
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchVenuesAction: () => {
+      dispatch(fetchVenuesAction())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
