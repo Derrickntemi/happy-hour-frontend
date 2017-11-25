@@ -1,27 +1,47 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react';
 import { Container } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import _ from 'lodash'
+
 
 
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
     position: 'relative', color: 'white', background: 'red',
-    height: 40, width: 60, top: -20, left: -30,
+    height: 6, width: 6, top: -20, left: -30,
   }}>
     {text}
   </div>
 );
 
-export default class MapContainer extends React.Component {
-  static defaultProps = {
+class MapContainer extends React.Component {
+
+  state = {
     center: {lat: 40.74, lng: -73.99},
-    zoom: 11
-  };
+    zoom: 12
+  }
+
+  findCenterOfMap = () => {
+    const latAverage = _.meanBy(this.props.currentVenues, venue => venue.latitude)
+    const lngAverage = _.meanBy(this.props.currentVenues, venue => venue.longitude)
+    this.setState({
+      center: {latAverage, lngAverage},
+      zoom: 15
+    })
+
+  }
+
+  outputMarkers = () => {
+    return this.props.currentVenues.map(venue => {
+      console.log("lat", venue.latitude)
+      console.log("long", venue.longitude)
+      return <AnyReactComponent lat={venue.latitude} lng={venue.longitude}/>
+    })
+  }
 
 
-  // has use of this.props.neighborhood and this.props.day
-  
   render() {
     return (
       <Container fluid className="google-map-wrapper">
@@ -32,12 +52,17 @@ export default class MapContainer extends React.Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-          <AnyReactComponent
-            lat={40.737133}
-            lng={-73.987950}
-          />
+        {this.outputMarkers()}
         </GoogleMapReact>
       </Container>
     );
   }
 }
+
+function mapStateToProps(state){
+  return {
+    currentVenues: state.currentVenues
+  }
+}
+
+export default connect(mapStateToProps, null)(MapContainer)

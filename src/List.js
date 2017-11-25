@@ -5,15 +5,16 @@ import { connect } from 'react-redux'
 class List extends React.Component {
 
   render(){
-    const venues = this.props.venues.map(venue => {
-      return <li>{venue.venue_name}</li>
+    const venues = this.props.currentVenues.map((venue, idx) => {
+      console.log("venue name", venue.venue_name)
+      return <li key={idx}>{venue.venue_name}</li>
     })
     return(
       <div>
       {this.props.isLoading ? <p>Loading</p> : null}
-      <ul>
-      {venues}
-      </ul>
+        <ul>
+        {venues}
+        </ul>
       </div>
     )
   }
@@ -24,6 +25,7 @@ function mapStateToProps(state){
 
   return ({
     venues: state.venues,
+    currentVenues: state.currentVenues,
     isLoading: state.isLoading
   })
 }

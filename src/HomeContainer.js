@@ -11,7 +11,7 @@ class HomeContainer extends Component {
 
   state = {
     dayInput: "Sunday",
-    neighborhoodInput: "",
+    neighborhoodInput: "Astoria",
   }
 
   componentDidMount = () => {
@@ -19,8 +19,6 @@ class HomeContainer extends Component {
   }
 
   handleInputDayChange = (event) => {
-    console.log("log day", event.target.value)
-    console.log("log state", this.state.dayInput)
     this.setState({
       dayInput: event.target.value
     })
@@ -33,13 +31,11 @@ class HomeContainer extends Component {
   }
 
   handleSubmit = () => {
-    console.log("handleSubmit", this.props.venues)
     this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
   }
 
 
   render() {
-    console.log("current", this.props.currentVenues)
     return (
       <Grid className="form-wrapper" columns={3} divided>
         <MapContainer />
@@ -55,14 +51,41 @@ class HomeContainer extends Component {
               <option value="friday">Friday</option>
               <option value="saturday">Saturday</option>
             </select>
-            <input
-              type="text"
-              placeholder="Neighborhood"
-              onChange={this.handleInputNeighborhoodChange}
-            />
+            <label htmlFor="neighborhood" >Where</label>
+            <select name="neighborhood" id="neighborhood" onChange={this.handleInputNeighborhoodChange} value={this.state.neighborhoodInput}>
+              <option value="Astoria">Astoria</option>
+              <option value="Brooklyn">Brooklyn</option>
+              <option value="Chelsea">Chelsea</option>
+              <option value="East Village">East Village</option>
+              <option value="Financial District">Financial District</option>
+              <option value="Flatiron">Flatiron</option>
+              <option value="Greenwich Village">Greenwich Village</option>
+              <option value="Hell\'s Kitchen">Hells Kitchen</option>
+              <option value="Hoboken">Hoboken</option>
+              <option value="Jersey City">Jersey City</option>
+              <option value="Kips Bay">Kips Bay</option>
+              <option value="Lower East Side">Lower East Side</option>
+              <option value="Manhattan Valley">Manhattan Valley</option>
+              <option value="Meatpacking District">Meatpacking District</option>
+              <option value="Midtown East">Midtown East</option>
+              <option value="Midtown West">Midtown West</option>
+              <option value="Murray Hill">Murray Hill</option>
+              <option value="NoHo">NoHo</option>
+              <option value="Nolita">Nolita</option>
+              <option value="Park Slope">Park Slope</option>
+              <option value="Queens">Queens</option>
+              <option value="SoHo">SoHo</option>
+              <option value="Theater District">Theater District</option>
+              <option value="TriBeCa">TriBeCa</option>
+              <option value="Union Square">Union Square</option>
+              <option value="Upper West Side">Upper West Side</option>
+              <option value="West Village">West Village</option>
+              <option value="Williamsburg">Williamsburg</option>
+            </select>
             <Button primary type="submit" onClick={this.handleSubmit}>Search</Button >
           </Form.Field>
         </Form>
+        <List />
       </Grid>
     );
   }

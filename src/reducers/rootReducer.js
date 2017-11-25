@@ -4,7 +4,6 @@ export default function rootReducer(
 ){
    switch(action.type) {
      case "SET_VENUES":
-      console.log("set venues reducer", action.payload)
       return ( Object.assign({}, state, {venues: action.payload}))
      case "SET_CURRENT_VENUES":
       console.log("currentVenues", action.payload )
