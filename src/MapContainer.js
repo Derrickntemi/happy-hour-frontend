@@ -19,6 +19,9 @@ export default class MapContainer extends React.Component {
     zoom: 11
   };
 
+
+  // has use of this.props.neighborhood and this.props.day
+  
   render() {
     return (
       <Container fluid className="google-map-wrapper">
