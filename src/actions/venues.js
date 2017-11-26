@@ -27,6 +27,7 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
         return special.day.toLowerCase() === day.toLowerCase()})
     })
     dispatch(setCurrentVenues(sortedVenues))
+    dispatch(setCurrentDay(day))
   }
 }
 
@@ -34,5 +35,12 @@ function setCurrentVenues(json) {
   return {
     type: "SET_CURRENT_VENUES",
     payload: json,
+  }
+}
+
+export function setCurrentDay(day) {
+  return {
+    type: "SET_CURRENT_DAY",
+    payload: day
   }
 }

@@ -19,25 +19,22 @@ const AnyReactComponent = ({ text }) => (
 class MapContainer extends React.Component {
 
   state = {
-    center: {lat: 40.74, lng: -73.99},
+    center: [40.74, -73.99],
     zoom: 12
   }
 
-  findCenterOfMap = () => {
-    const latAverage = _.meanBy(this.props.currentVenues, venue => venue.latitude)
-    const lngAverage = _.meanBy(this.props.currentVenues, venue => venue.longitude)
+  componentWillReceiveProps(nextProps) {
+    const latAverage = _.meanBy(nextProps.currentVenues, venue => venue.latitude)
+    const lngAverage = _.meanBy(nextProps.currentVenues, venue => venue.longitude)
     this.setState({
-      center: {latAverage, lngAverage},
+      center: [latAverage, lngAverage],
       zoom: 15
     })
-
   }
 
   outputMarkers = () => {
-    return this.props.currentVenues.map(venue => {
-      console.log("lat", venue.latitude)
-      console.log("long", venue.longitude)
-      return <AnyReactComponent lat={venue.latitude} lng={venue.longitude}/>
+    return this.props.currentVenues.map((venue, idx) => {
+      return <AnyReactComponent lat={venue.latitude} lng={venue.longitude} key={idx}/>
     })
   }
 
@@ -49,8 +46,8 @@ class MapContainer extends React.Component {
          bootstrapURLKeys={{
            key: "AIzaSyA3_XMllsvSYDPbcd971r_cyzS9XbePXHk",
          }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          center={this.state.center}
+          zoom={this.state.zoom}
         >
         {this.outputMarkers()}
         </GoogleMapReact>

@@ -41,7 +41,7 @@ class HomeContainer extends Component {
         <MapContainer />
         <Form>
           <Form.Field className="search-form-wrapper" >
-            <label htmlFor="day" >Day of the Week</label>
+            <label htmlFor="day" className="day-label">Day of the Week</label>
             <select name="day" id="day" onChange={this.handleInputDayChange} value={this.state.dayInput}>
               <option value="sunday">Sunday</option>
               <option value="monday">Monday</option>
@@ -51,10 +51,9 @@ class HomeContainer extends Component {
               <option value="friday">Friday</option>
               <option value="saturday">Saturday</option>
             </select>
-            <label htmlFor="neighborhood" >Where</label>
+            <label htmlFor="neighborhood" className="neighborhood-label">Where</label>
             <select name="neighborhood" id="neighborhood" onChange={this.handleInputNeighborhoodChange} value={this.state.neighborhoodInput}>
               <option value="Astoria">Astoria</option>
-              <option value="Brooklyn">Brooklyn</option>
               <option value="Chelsea">Chelsea</option>
               <option value="East Village">East Village</option>
               <option value="Financial District">Financial District</option>
@@ -73,7 +72,6 @@ class HomeContainer extends Component {
               <option value="NoHo">NoHo</option>
               <option value="Nolita">Nolita</option>
               <option value="Park Slope">Park Slope</option>
-              <option value="Queens">Queens</option>
               <option value="SoHo">SoHo</option>
               <option value="Theater District">Theater District</option>
               <option value="TriBeCa">TriBeCa</option>
@@ -82,7 +80,7 @@ class HomeContainer extends Component {
               <option value="West Village">West Village</option>
               <option value="Williamsburg">Williamsburg</option>
             </select>
-            <Button primary type="submit" onClick={this.handleSubmit}>Search</Button >
+            <Button primary type="submit" onClick={this.handleSubmit} className="form-button">Search</Button >
           </Form.Field>
         </Form>
         <List />

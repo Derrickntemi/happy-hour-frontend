@@ -11,5 +11,25 @@
   height: 30em;
 }
 
-.form-wrapper {
+.results-table-wrapper {
+  margin: 50px;
+
+}
+
+.search-form-wrapper {
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.neighborhood-label {
+  text-align: center;
+}
+
+.day-label {
+  text-align: center;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
 }
