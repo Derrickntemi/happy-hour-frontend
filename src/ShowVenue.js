@@ -8,6 +8,7 @@ import { setCurrentVenues } from './actions/venues.js'
 class ShowVenue extends React.Component {
 
   getSpecialsDetails = (venue) => {
+    console.log("poop", venue.specials)
     return venue.specials.map((special, idx) => {
       return(
         <tr key={idx}>
@@ -20,6 +21,7 @@ class ShowVenue extends React.Component {
 
   setVenueData = (id, venues) => {
     const venue = findVenueById(parseInt(id), venues)
+    console.log("this venue", venue)
     this.props.setCurrentVenues([venue])
   }
 
