@@ -4,6 +4,7 @@ import { findVenueById } from './helpers/findVenueById'
 import MapContainer from './MapContainer'
 import { setCurrentVenues } from './actions/venues.js'
 import CommentContainer from './comments/CommentContainer'
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 
 class ShowVenue extends React.Component {
@@ -63,7 +64,14 @@ class ShowVenue extends React.Component {
         </div>
       )
     } else {
-      return <h1>Loading</h1>
+      return (
+        <Segment className="loading-icon">
+          <Dimmer active inverted>
+            <Loader size='massive'>Loading</Loader>
+          </Dimmer>
+          <Image src='/assets/images/wireframe/short-paragraph.png' />
+        </Segment>
+  )
     }
   }
 }

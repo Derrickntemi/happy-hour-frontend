@@ -6,4 +6,15 @@ export default class VenuesApi {
       .then(res => res.json())
   }
 
+  static postComments(params) {
+    return fetch("http://localhost:3000/comments", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(params)
+    }).then(res => res.json())
+  }
+
 }
