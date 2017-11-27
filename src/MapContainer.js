@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 
-
-
 const AnyReactComponent = ({ text }) => (
   <div style={{
     position: 'relative', color: 'white', background: 'red',

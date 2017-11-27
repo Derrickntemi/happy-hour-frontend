@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import MapContainer from './MapContainer';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import { Button, Form, Grid } from 'semantic-ui-react';
-import { fetchVenuesAction, sortedByDayAndNeighborhood } from './actions/venues.js'
+import { Button, Form, Grid, Select, Card } from 'semantic-ui-react';
+import { sortedByDayAndNeighborhood } from './actions/venues.js'
 import List from './List.js'
+import { dayOptions, neighborhoodOptions } from './helpers/selectOptions'
 
 
 class HomeContainer extends Component {
@@ -14,19 +14,15 @@ class HomeContainer extends Component {
     neighborhoodInput: "Astoria",
   }
 
-  componentDidMount = () => {
-    this.props.fetchVenuesAction()
-  }
-
-  handleInputDayChange = (event) => {
+  handleInputDayChange = (event, data) => {
     this.setState({
-      dayInput: event.target.value
+      dayInput: data.value
     })
   }
 
-  handleInputNeighborhoodChange = (event) => {
+  handleInputNeighborhoodChange = (event, data) => {
     this.setState({
-      neighborhoodInput: event.target.value
+      neighborhoodInput: data.value
     })
   }
 
@@ -37,52 +33,43 @@ class HomeContainer extends Component {
 
   render() {
     return (
-      <Grid className="form-wrapper" columns={3} divided>
-        <MapContainer />
-        <Form>
-          <Form.Field className="search-form-wrapper" >
-            <label htmlFor="day" className="day-label">Day of the Week</label>
-            <select name="day" id="day" onChange={this.handleInputDayChange} value={this.state.dayInput}>
-              <option value="sunday">Sunday</option>
-              <option value="monday">Monday</option>
-              <option value="tuesday">Tuesday</option>
-              <option value="wednesday">Wednesday</option>
-              <option value="thursday">Thursday</option>
-              <option value="friday">Friday</option>
-              <option value="saturday">Saturday</option>
-            </select>
-            <label htmlFor="neighborhood" className="neighborhood-label">Where</label>
-            <select name="neighborhood" id="neighborhood" onChange={this.handleInputNeighborhoodChange} value={this.state.neighborhoodInput}>
-              <option value="Astoria">Astoria</option>
-              <option value="Chelsea">Chelsea</option>
-              <option value="East Village">East Village</option>
-              <option value="Financial District">Financial District</option>
-              <option value="Flatiron">Flatiron</option>
-              <option value="Greenwich Village">Greenwich Village</option>
-              <option value="Hell\'s Kitchen">Hells Kitchen</option>
-              <option value="Hoboken">Hoboken</option>
-              <option value="Jersey City">Jersey City</option>
-              <option value="Kips Bay">Kips Bay</option>
-              <option value="Lower East Side">Lower East Side</option>
-              <option value="Manhattan Valley">Manhattan Valley</option>
-              <option value="Meatpacking District">Meatpacking District</option>
-              <option value="Midtown East">Midtown East</option>
-              <option value="Midtown West">Midtown West</option>
-              <option value="Murray Hill">Murray Hill</option>
-              <option value="NoHo">NoHo</option>
-              <option value="Nolita">Nolita</option>
-              <option value="Park Slope">Park Slope</option>
-              <option value="SoHo">SoHo</option>
-              <option value="Theater District">Theater District</option>
-              <option value="TriBeCa">TriBeCa</option>
-              <option value="Union Square">Union Square</option>
-              <option value="Upper West Side">Upper West Side</option>
-              <option value="West Village">West Village</option>
-              <option value="Williamsburg">Williamsburg</option>
-            </select>
-            <Button primary type="submit" onClick={this.handleSubmit} className="form-button">Search</Button >
-          </Form.Field>
-        </Form>
+      <Grid className="form-wrapper" stackable columns={3} divided>
+        <Grid.Row>
+          <Grid.Column width={4}>
+            <Card >
+              <Card.Content>
+                <Form className="search-form-wrapper">
+                  <Form.Field  >
+                    <label htmlFor="day" className="day-label">Day of the Week</label>
+                    <Select
+                      name="day"
+                      id="day"
+                      onChange={this.handleInputDayChange}
+                      value={this.state.dayInput}
+                      placeholder='Day'
+                      options={dayOptions}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label htmlFor="neighborhood" className="neighborhood-label">Where</label>
+                    <Select
+                      name="neighborhood"
+                      id="neighborhood"
+                      onChange={this.handleInputNeighborhoodChange}
+                      value={this.state.neighborhoodInput}
+                      placeholder='Neighborhood'
+                      options={neighborhoodOptions}
+                    />
+                  </Form.Field>
+                  <Button type="submit" onClick={this.handleSubmit} className="form-button">Search</Button >
+                </Form>
+              </Card.Content>
+            </Card>
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <MapContainer />
+          </Grid.Column>
+        </Grid.Row>
         <List />
       </Grid>
     );
@@ -98,7 +85,6 @@ function mapStateToProps(state){
 }
 
 const mapDispatchToProps = {
-  fetchVenuesAction,
   sortedByDayAndNeighborhood,
 }
 

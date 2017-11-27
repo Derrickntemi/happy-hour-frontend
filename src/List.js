@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+
 
 
 class List extends React.Component {
@@ -12,12 +14,13 @@ class List extends React.Component {
       const time = special.time
       return(
         <tr key={idx}>
-          <td>{venue.venue_name}</td>
+          <td><Link to={`/venue/${venue.id}`}>{venue.venue_name}</Link></td>
           <td>{deal}</td>
           <td>{time}</td>
         </tr>
       )
     })
+
     return(
       <div className="results-table-wrapper">
       {this.props.isLoading ? <p>Loading</p> : null}
@@ -31,10 +34,11 @@ class List extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {venues}
+          {venues}
           </tbody>
         </table>
       }
+
       </div>
     )
   }
