@@ -4,7 +4,6 @@ import { Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-
 const AnyReactComponent = ({ text }) => (
   <div style={{
     position: 'relative', color: 'white', background: 'red',
@@ -54,7 +53,7 @@ class MapContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     currentVenues: state.currentVenues
   }

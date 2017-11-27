@@ -11,15 +11,14 @@ export function fetchVenuesAction() {
   }
 }
 
-function fetchedVenues(json) {
+function fetchedVenues(venues) {
   return {
     type: "SET_VENUES",
-    payload: json,
+    payload: venues,
   }
 }
 
 export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
-
   return function(dispatch) {
     const sortedVenues = allVenues.filter((venue) => {
 
@@ -31,10 +30,10 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
   }
 }
 
-function setCurrentVenues(json) {
+export function setCurrentVenues(sortedVenues) {
   return {
     type: "SET_CURRENT_VENUES",
-    payload: json,
+    payload: sortedVenues,
   }
 }
 
@@ -42,5 +41,12 @@ export function setCurrentDay(day) {
   return {
     type: "SET_CURRENT_DAY",
     payload: day
+  }
+}
+
+export function setShowVenue(id) {
+  return {
+    type: "SET_SHOW_VENUE",
+    payload: id
   }
 }

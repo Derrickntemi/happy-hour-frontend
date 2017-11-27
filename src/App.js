@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Route exact path="/" component={HomeContainer} />
-        <Route path="/venue/:id" component={ShowVenue}/>
+        <Route path="/venue/:id" component={ShowVenue} />
       </div>
     );
   }

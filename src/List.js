@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 class List extends React.Component {
 
   render(){
+    console.log("currentVenues", currentVenues)
     const venues = this.props.currentVenues.map((venue, idx) => {
       const special = venue.specials.find(special => {
         return special.day.toLowerCase() === this.props.currentDay.toLowerCase()})

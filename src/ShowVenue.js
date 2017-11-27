@@ -2,63 +2,44 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { findVenueById } from './helpers/findVenueById'
 import MapContainer from './MapContainer'
-import { sortedByDayAndNeighborhood } from './actions/venues.js'
-
+import { setCurrentVenues } from './actions/venues.js'
 
 
 class ShowVenue extends React.Component {
 
-  state = {
-    venueById: null
-  }
-
-  getSpecialsDetails = () => {
-    if(this.state.venueById) {
-      return this.state.venueById.specials.map((special, idx) => {
-        return(
-          <tr key={idx}>
-            <td>{special.day}</td>
-            <td>{special.special}</td>
-            <td>{special.time}</td>
-          </tr>
-        )})
-      } else {
-        return <tr><td>Loading</td></tr>
-      }
+  getSpecialsDetails = (venue) => {
+    return venue.specials.map((special, idx) => {
+      return(
+        <tr key={idx}>
+          <td>{special.day}</td>
+          <td>{special.special}</td>
+          <td>{special.time}</td>
+        </tr>
+      )})
     }
 
-
-
-
-  componentWillMount(){
-    this.setState({
-      venueById: findVenueById(this.props.match.params.id, this.props.venues)
-    })
-    console.log("logg the venue", this.state.venueById)
+  setVenueData = (id, venues) => {
+    const venue = findVenueById(parseInt(id), venues)
+    this.props.setCurrentVenues([venue])
   }
 
-  componentWillReceiveProps(nextProps){
-    if(!this.state.venueById){
-      this.setState({
-        venueById: findVenueById(nextProps.match.params.id, nextProps.venues)
-      })
-    }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.venues.length > 0 && this.venue === undefined)
+      this.setVenueData(this.props.match.params.id, nextProps.venues)
   }
-
-  // day, neighborhood, allVenues
 
   render() {
-    if(this.state.venueById){
-      console.log("logged props", this.props.venues)
+    if (this.props.venues.length > 0) {
+      const venue = this.props.venues[0]
       return(
         <div>
           <div className="venue-info-wrapper">
-            <h1>{this.state.venueById.venue_name}</h1>
-              <h3>{this.state.venueById.address}</h3>
+            <h1>{venue.venue_name}</h1>
+              <h3>{venue.address}</h3>
               <h3>
-                {this.state.venueById.city}, {this.state.venueById.state} {this.state.venueById.zipcode}
+                {venue.city}, {venue.state} {venue.zipcode}
               </h3>
-              <h3>{this.state.venueById.phone_number}</h3>
+              <h3>{venue.phone_number}</h3>
           </div>
           <MapContainer />
           <div className="venue-specials-table-wrapper">
@@ -71,7 +52,7 @@ class ShowVenue extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.getSpecialsDetails()}
+                {this.getSpecialsDetails(venue)}
               </tbody>
             </table>
           </div>
@@ -86,12 +67,13 @@ class ShowVenue extends React.Component {
 function mapStateToProps(state) {
   return ({
     venues: state.venues,
-    currentVenues: state.currentVenues
   })
 }
 
-const mapDispatchToProps = {
-  sortedByDayAndNeighborhood,
+const mapDispatchToProps = (dispatch) => {
+  return({
+    setCurrentVenues: (sortedVenues) => { dispatch(setCurrentVenues(sortedVenues)) }
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowVenue)
