@@ -7,20 +7,19 @@ import { Link } from 'react-router-dom';
 class List extends React.Component {
 
   render(){
-    if(this.props.currentVenues.length > 0) {
-      const venues = this.props.currentVenues.map((venue, idx) => {
-        const special = venue.specials.find(special => {
-          return special.day.toLowerCase() === this.props.currentDay.toLowerCase()})
-        const deal = special.special
-        const time = special.time
-        return(
-          <tr key={idx}>
-            <td><Link to={`/venue/${venue.id}`}>{venue.venue_name}</Link></td>
-            <td>{deal}</td>
-            <td>{time}</td>
-          </tr>
-        )
-      })
+    const venues = this.props.currentVenues.map((venue, idx) => {
+      const special = venue.specials.find(special => {
+        return special.day.toLowerCase() === this.props.currentDay.toLowerCase()})
+      const deal = special.special
+      const time = special.time
+      return(
+        <tr key={idx}>
+          <td><Link to={`/venue/${venue.id}`}>{venue.venue_name}</Link></td>
+          <td>{deal}</td>
+          <td>{time}</td>
+        </tr>
+      )
+    })
 
     return(
       <div className="results-table-wrapper">
@@ -39,10 +38,9 @@ class List extends React.Component {
           </tbody>
         </table>
       }
+
       </div>
-    )} else {
-      return null
-    }
+    )
   }
 }
 

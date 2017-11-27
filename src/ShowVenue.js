@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { findVenueById } from './helpers/findVenueById'
 import MapContainer from './MapContainer'
 import { setCurrentVenues } from './actions/venues.js'
+import CommentContainer from './comments/CommentContainer'
 
 
 class ShowVenue extends React.Component {
@@ -57,6 +58,7 @@ class ShowVenue extends React.Component {
                 {this.getSpecialsDetails(venue)}
               </tbody>
             </table>
+            < CommentContainer />
           </div>
         </div>
       )
