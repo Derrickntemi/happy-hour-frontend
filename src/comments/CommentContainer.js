@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Comment, Form, Header, Input } from 'semantic-ui-react'
-import { postComments } from '../services/venuesApi.js'
 import { postCommentsAction } from '../actions/venues.js'
 
 
-
-export default class CommentContainer extends Component {
+class CommentContainer extends Component {
 
   state = {
     comment: null,
     name: null,
+    id: parseInt(this.props.match.params.id, 10),
   }
 
   getDate = () => {
@@ -24,11 +23,29 @@ export default class CommentContainer extends Component {
 
   handleSubmitComment = (event) => {
     event.preventDefault()
-    this.props.postCommentsAction()
+    const commentObj = {
+      comment: {
+        comment: this.state.comment,
+        name: this.state.name,
+        id: this.state.id
+      }
+    }
+    if(this.props.venues.length > 0){
+      this.props.postCommentsAction(commentObj)
+      console.log("comment state", this.state)
+    }
   }
 
   handleCommentChange = (event) => {
+    this.setState({
+      comment: event.target.value
+    })
+  }
 
+  handleNameChange = (event) => {
+    this.setState({
+      name: event.target.value
+    })
   }
 
   render(){
@@ -38,15 +55,15 @@ export default class CommentContainer extends Component {
           <Header as='h3' dividing>Comments</Header>
           <Comment>
             <Comment.Content>
-              <Comment.Author as='a'>Matt</Comment.Author>
+              <Comment.Author as={this.state.name}></Comment.Author>
               <Comment.Metadata>
                 <div>{this.getDate()}</div>
               </Comment.Metadata>
-              <Comment.Text>How artistic!</Comment.Text>
+              <Comment.Text>{this.state.comment}</Comment.Text>
               <Comment.Actions>
                 <Comment.Action>Reply</Comment.Action>
               </Comment.Actions>
-              <Input placeholder="Your Name Here"/>
+              <Input placeholder="Your Name Here" onChange={this.handleNameChange}/>
             </Comment.Content>
           </Comment>
           <Form reply>
@@ -59,6 +76,14 @@ export default class CommentContainer extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return ({
+    venues: state.venues,
+  })
+}
+
 const mapDispatchToProps = {
   postCommentsAction,
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer)

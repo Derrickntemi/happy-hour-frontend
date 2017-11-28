@@ -24,7 +24,7 @@ class ShowVenue extends React.Component {
     }
 
   setVenueData = (id, venues) => {
-    const venue = findVenueById(parseInt(id), venues)
+    const venue = findVenueById(parseInt(id, 10), venues)
     console.log("this venue", venue)
     this.props.setCurrentVenues([venue])
     this.setState({
@@ -71,7 +71,7 @@ class ShowVenue extends React.Component {
                 {this.getSpecialsDetails(this.state.venue)}
               </tbody>
             </table>
-            < CommentContainer />
+            < CommentContainer match={this.props.match}/>
           </div>
         </div>
       )

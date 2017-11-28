@@ -13,9 +13,16 @@ export function fetchVenuesAction() {
 
 export function postCommentsAction(params) {
   return function(dispatch){
-    VenuesApi.postComments(params).then(comment => {
-      dispatch({})
+    VenuesApi.postComments(params).then(comments => {
+      dispatch(setCurrentComments(comments))
     })
+  }
+}
+
+function setCurrentComments(comments){
+  return {
+    type: "SET_CURRENT_COMMENTS",
+    payload: comments
   }
 }
 
