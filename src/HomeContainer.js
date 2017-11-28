@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapContainer from './MapContainer';
+import MapContainer from './map/MapContainer';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Select, Card } from 'semantic-ui-react';
 import { sortedByDayAndNeighborhood } from './actions/venues.js'

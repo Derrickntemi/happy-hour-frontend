@@ -20,13 +20,23 @@ class MapContainer extends React.Component {
     zoom: 12
   }
 
-  componentWillReceiveProps(nextProps) {
-    const latAverage = _.meanBy(nextProps.currentVenues, venue => venue.latitude)
-    const lngAverage = _.meanBy(nextProps.currentVenues, venue => venue.longitude)
+  getAverageLatLng = (currentVenues) => {
+    const latAverage = _.meanBy(currentVenues, venue => venue.latitude)
+    const lngAverage = _.meanBy(currentVenues, venue => venue.longitude)
     this.setState({
       center: [latAverage, lngAverage],
       zoom: 15
     })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getAverageLatLng(nextProps.currentVenues)
+  }
+
+  componentDidMount() {
+    if(this.props.currentVenues.length){
+      this.getAverageLatLng(this.props.currentVenues)
+    }
   }
 
   outputMarkers = () => {

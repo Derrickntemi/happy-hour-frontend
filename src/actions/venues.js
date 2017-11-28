@@ -11,6 +11,14 @@ export function fetchVenuesAction() {
   }
 }
 
+export function postCommentsAction(params) {
+  return function(dispatch){
+    VenuesApi.postComments(params).then(comment => {
+      dispatch({})
+    })
+  }
+}
+
 function fetchedVenues(venues) {
   return {
     type: "SET_VENUES",

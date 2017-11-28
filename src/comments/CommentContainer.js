@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Comment, Form, Header, Input } from 'semantic-ui-react'
+import { postComments } from '../services/venuesApi.js'
+import { postCommentsAction } from '../actions/venues.js'
+
 
 
 export default class CommentContainer extends Component {
+
+  state = {
+    comment: null,
+    name: null,
+  }
 
   getDate = () => {
     const dateObj = new Date();
@@ -16,7 +24,11 @@ export default class CommentContainer extends Component {
 
   handleSubmitComment = (event) => {
     event.preventDefault()
-    
+    this.props.postCommentsAction()
+  }
+
+  handleCommentChange = (event) => {
+
   }
 
   render(){
@@ -38,12 +50,15 @@ export default class CommentContainer extends Component {
             </Comment.Content>
           </Comment>
           <Form reply>
-            <Form.TextArea />
+            <Form.TextArea onChange={this.handleCommentChange}/>
             <Button onClick={this.handleSubmitComment} content='Add Comment' labelPosition='left' icon='comment' primary />
           </Form>
         </Comment.Group>
       </div>
     )
   }
+}
 
+const mapDispatchToProps = {
+  postCommentsAction,
 }
