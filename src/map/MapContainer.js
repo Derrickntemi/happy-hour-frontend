@@ -23,6 +23,8 @@ class MapContainer extends React.Component {
   getAverageLatLng = (currentVenues) => {
     const latAverage = _.meanBy(currentVenues, venue => venue.latitude)
     const lngAverage = _.meanBy(currentVenues, venue => venue.longitude)
+
+
     this.setState({
       center: [latAverage, lngAverage],
       zoom: 15
@@ -30,18 +32,24 @@ class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("JUST GOT LOCATION? ", nextProps.userLocation);
-    this.getAverageLatLng(nextProps.currentVenues)
+    if(!nextProps.userLocation.length && nextProps.currentVenues.length){
+      this.getAverageLatLng(nextProps.currentVenues)
+    } else {
+      this.setState({
+        center: [nextProps.userLocation[0], nextProps.userLocation[1]],
+        zoom: 15
+      })
+    }
   }
 
-  componentDidMount() {
-    if(this.props.currentVenues.length){
-      this.getAverageLatLng(this.props.currentVenues)
-    }
-    this.displayNearestLocations()
-  }
+  // componentDidMount() {
+  //   if(this.props.currentVenues.length){
+  //     this.getAverageLatLng(this.props.currentVenues)
+  //   }
+  // }
 
   displayNearestLocations = () => {
+
   }
 
   outputMarkers = () => {
@@ -52,6 +60,8 @@ class MapContainer extends React.Component {
 
 
   render() {
+    console.log("zoom", this.state.zoom)
+
     return (
       <Container fluid className="google-map-wrapper">
          <GoogleMapReact className="google-map"
@@ -69,6 +79,7 @@ class MapContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log("state", state)
   return {
     currentVenues: state.currentVenues,
     userLocation: state.userLocation,

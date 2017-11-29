@@ -5,7 +5,6 @@ export function fetchVenuesAction() {
   console.log("fetchVenues")
   return function(dispatch) {
     VenuesApi.fetchVenues().then(venues => {
-      console.log('venues', venues)
       dispatch(fetchedVenues(venues))
     })
   }
@@ -15,7 +14,6 @@ export function fetchCommentsAction(id) {
   return function(dispatch) {
     VenuesApi.fetchComments(id)
       .then(comments => {
-        console.log('currentComments', comments)
         dispatch(setCurrentComments(comments))
       })
   }
@@ -29,7 +27,6 @@ export function addComment(comment) {
 }
 
 export function setCurrentComments(comments){
-  console.log("setCurrentComments", comments)
   return {
     type: "SET_CURRENT_COMMENTS",
     payload: comments
