@@ -24,7 +24,6 @@ class MapContainer extends React.Component {
     const latAverage = _.meanBy(currentVenues, venue => venue.latitude)
     const lngAverage = _.meanBy(currentVenues, venue => venue.longitude)
 
-
     this.setState({
       center: [latAverage, lngAverage],
       zoom: 15
@@ -32,21 +31,24 @@ class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(!nextProps.userLocation.length && nextProps.currentVenues.length){
-      this.getAverageLatLng(nextProps.currentVenues)
-    } else {
+    console.log("userLocation", nextProps.userLocation)
+    console.log("currentVenues", nextProps.currentVenues)
+
+    if(nextProps.userLocation.length && !nextProps.currentVenues.length){
       this.setState({
         center: [nextProps.userLocation[0], nextProps.userLocation[1]],
         zoom: 15
       })
+    } else if(nextProps.currentVenues.length) {
+      this.getAverageLatLng(nextProps.currentVenues)
     }
   }
 
-  // componentDidMount() {
-  //   if(this.props.currentVenues.length){
-  //     this.getAverageLatLng(this.props.currentVenues)
-  //   }
-  // }
+  componentDidMount() {
+    if(this.props.currentVenues.length){
+      this.getAverageLatLng(this.props.currentVenues)
+    }
+  }
 
   displayNearestLocations = () => {
 

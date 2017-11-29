@@ -83,7 +83,7 @@ class ShowVenue extends React.Component {
           </Dimmer>
           <Image src='/assets/images/wireframe/short-paragraph.png' />
         </Segment>
-  )
+      )
     }
   }
 }
