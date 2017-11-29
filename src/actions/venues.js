@@ -2,7 +2,6 @@ import VenuesApi from "../services/venuesApi";
 
 
 export function fetchVenuesAction() {
-  console.log("fetchVenues")
   return function(dispatch) {
     VenuesApi.fetchVenues().then(venues => {
       dispatch(fetchedVenues(venues))

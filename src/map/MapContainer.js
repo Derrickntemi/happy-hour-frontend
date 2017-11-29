@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import { Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import geolib from 'geolib'
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
@@ -31,8 +32,6 @@ class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("userLocation", nextProps.userLocation)
-    console.log("currentVenues", nextProps.currentVenues)
 
     if(nextProps.userLocation.length && !nextProps.currentVenues.length){
       this.setState({
@@ -62,8 +61,6 @@ class MapContainer extends React.Component {
 
 
   render() {
-    console.log("zoom", this.state.zoom)
-
     return (
       <Container fluid className="google-map-wrapper">
          <GoogleMapReact className="google-map"
@@ -81,9 +78,9 @@ class MapContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state", state)
   return {
     currentVenues: state.currentVenues,
+    venues: state.venues,
     userLocation: state.userLocation,
   }
 }

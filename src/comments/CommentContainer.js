@@ -4,6 +4,7 @@ import { Button, Comment, Form, Header, Input } from 'semantic-ui-react'
 import { findCommentsById } from '../helpers/findCommentsById'
 import { setCurrentComments, addComment, fetchCommentsAction } from '../actions/venues.js'
 import VenuesApi from "../services/venuesApi";
+import CommentList from './CommentList'
 
 
 
@@ -16,14 +17,14 @@ class CommentContainer extends Component {
     id: parseInt(this.props.match.params.id, 10),
   }
 
-  getDate = () => {
-    const dateObj = new Date();
-    const month = dateObj.getUTCMonth() + 1;
-    const day = dateObj.getUTCDate();
-    const year = dateObj.getUTCFullYear();
-    const newDate = month + "/" + day + "/" + year;
-    return newDate
-  }
+  // getDate = () => {
+  //   const dateObj = new Date();
+  //   const month = dateObj.getUTCMonth() + 1;
+  //   const day = dateObj.getUTCDate();
+  //   const year = dateObj.getUTCFullYear();
+  //   const newDate = month + "/" + day + "/" + year;
+  //   return newDate
+  // }
 
   handleSubmitComment = (event) => {
     event.preventDefault()
@@ -55,23 +56,6 @@ class CommentContainer extends Component {
     })
   }
 
-  showComments = () => {
-    if(this.props.currentComments){
-      return findCommentsById(this.state.id, this.props.currentComments).map((comment, idx) => {
-        return (
-          <Comment.Content key={idx} className="display-comment-div">
-            <Header as='h3' dividing></Header>
-            <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
-            <Comment.Text>{comment.comments}</Comment.Text>
-          </Comment.Content>
-        )
-      })
-    }
-  }
-
-  componentDidMount() {
-    this.props.fetchCommentsAction(this.state.id)
-  }
 
   render(){
     return(
@@ -93,7 +77,7 @@ class CommentContainer extends Component {
             <Button onClick={this.handleSubmitComment} content='Add Comment' labelPosition='left' icon='comment' primary />
           </Form>
         </Comment.Group>
-        {this.showComments()}
+        < CommentList id={this.state.id}/>
       </div>
     )
   }
@@ -109,7 +93,6 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   setCurrentComments,
   addComment,
-  fetchCommentsAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer)
