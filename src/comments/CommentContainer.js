@@ -58,7 +58,6 @@ class CommentContainer extends Component {
   showComments = () => {
     if(this.props.currentComments){
       return findCommentsById(this.state.id, this.props.currentComments).map((comment, idx) => {
-        console.log("whats the comment", comment)
         return (
           <Comment.Content key={idx} className="display-comment-div">
             <Header as='h3' dividing></Header>
@@ -75,7 +74,6 @@ class CommentContainer extends Component {
   }
 
   render(){
-    console.log("currentComments Render", this.props.currentComments)
     return(
       <div className="comment-form-wrapper">
         <Comment.Group>

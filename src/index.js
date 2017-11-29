@@ -9,10 +9,14 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers/rootReducer";
 import { BrowserRouter as Router } from "react-router-dom";
+import { setLocation } from './map/Geolocation'
 
 const store = createStore(rootReducer,
                           applyMiddleware(thunk)
 )
+
+setLocation(store)
+
 
 ReactDOM.render(
   <Provider store={store}>

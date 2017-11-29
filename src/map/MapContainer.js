@@ -30,6 +30,7 @@ class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("JUST GOT LOCATION? ", nextProps.userLocation);
     this.getAverageLatLng(nextProps.currentVenues)
   }
 
@@ -37,6 +38,10 @@ class MapContainer extends React.Component {
     if(this.props.currentVenues.length){
       this.getAverageLatLng(this.props.currentVenues)
     }
+    this.displayNearestLocations()
+  }
+
+  displayNearestLocations = () => {
   }
 
   outputMarkers = () => {
@@ -65,7 +70,8 @@ class MapContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentVenues: state.currentVenues
+    currentVenues: state.currentVenues,
+    userLocation: state.userLocation,
   }
 }
 

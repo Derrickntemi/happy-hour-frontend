@@ -7,7 +7,6 @@ import Navbar from './Navbar'
 import ShowVenue from './ShowVenue'
 import { fetchVenuesAction } from './actions/venues.js'
 
-
 class App extends Component {
 
   componentDidMount = () => {

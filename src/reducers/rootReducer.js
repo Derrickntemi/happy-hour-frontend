@@ -1,5 +1,5 @@
 export default function rootReducer(
-  state = { venues: [], currentVenues: [], currentDay: "", currentComments: [], isLoading: false },
+  state = { venues: [], currentVenues: [], currentDay: "", currentComments: [], userLocation: [], isLoading: false },
   action
 ) {
   switch(action.type) {
@@ -11,6 +11,8 @@ export default function rootReducer(
       return (Object.assign({}, state, {currentDay: action.payload}))
     case "SET_CURRENT_COMMENTS":
       return (Object.assign({}, state, {currentComments: action.payload}))
+    case "SET_USER_LOCATION":
+      return (Object.assign({}, state, {userLocation: action.payload}))
     case "ADD_COMMENT":
       return (Object.assign({}, state, {currentComments: state.currentComments.concat(action.payload)}))
     default:

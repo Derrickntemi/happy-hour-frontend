@@ -55,6 +55,15 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
   }
 }
 
+export function setUserLocation(loc) {
+  return function(dispatch) {
+    dispatch({
+      type: "SET_USER_LOCATION",
+      payload: loc
+    })
+  }
+}
+
 export function setCurrentVenues(sortedVenues) {
   return {
     type: "SET_CURRENT_VENUES",

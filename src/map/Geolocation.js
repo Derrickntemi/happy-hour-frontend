@@ -1,13 +1,15 @@
+import { setUserLocation } from '../actions/venues.js'
 
-// function handleGottenPosition(pos) {
-//   console.log("coodinates", pos.coords);
-//   return [pos.coords.latitude, pos.coords.longitude]
-// }
-//
-//   export function getLocation() {
-//     if (navigator.geolocation) {
-//       return navigator.geolocation.getCurrentPosition(handleGottenPosition)
-//     } else {
-//       alert("Geolocation is not supported by this browser.");
-//     }
-//   }
+function addLocationToStore(loc, store) {
+  setUserLocation(loc)(store.dispatch)
+}
+
+function getLocation(store) {
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    addLocationToStore([pos.coords.latitude, pos.coords.longitude], store)
+  })
+}
+
+export function setLocation(store) {
+  navigator.geolocation ? getLocation(store) : alert("Geolocation is not supported by this browser.");
+}
