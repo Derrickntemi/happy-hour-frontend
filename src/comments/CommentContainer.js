@@ -32,9 +32,8 @@ class CommentContainer extends Component {
       user_name: this.state.name,
       id: this.state.id
     }
-
     this.props.addComment(commentObj)
-      
+
     VenuesApi.postComments(commentObj)
     .then(
       this.setState({
@@ -58,14 +57,14 @@ class CommentContainer extends Component {
 
   showComments = () => {
     if(this.props.currentComments){
-      console.log("this you dumb comp", findCommentsById(this.state.id, this.props.currentComments))
       return findCommentsById(this.state.id, this.props.currentComments).map((comment, idx) => {
         console.log("whats the comment", comment)
         return (
-          <div key={idx} className="display-comment-div">
-            <h4>{comment.user_name}</h4>
-            <p>{comment.comments}</p>
-          </div>
+          <Comment.Content key={idx} className="display-comment-div">
+            <Header as='h3' dividing></Header>
+            <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
+            <Comment.Text>{comment.comments}</Comment.Text>
+          </Comment.Content>
         )
       })
     }
