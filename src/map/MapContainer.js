@@ -35,8 +35,9 @@ class MapContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log("get location", getLocation())
-    getLocation()
+    if (getLocation()) {
+      console.log("get location", getLocation())
+    }
     if(this.props.currentVenues.length){
       this.getAverageLatLng(this.props.currentVenues)
     }
@@ -67,7 +68,8 @@ class MapContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentVenues: state.currentVenues
+    currentVenues: state.currentVenues,
+    venues: state.venues
   }
 }
 

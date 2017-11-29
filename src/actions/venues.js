@@ -11,15 +11,25 @@ export function fetchVenuesAction() {
   }
 }
 
-export function postCommentsAction(params) {
-  return function(dispatch){
-    VenuesApi.postComments(params).then(comments => {
-      dispatch(setCurrentComments(comments))
-    })
+export function fetchCommentsAction(id) {
+  return function(dispatch) {
+    VenuesApi.fetchComments(id)
+      .then(comments => {
+        console.log('currentComments', comments)
+        dispatch(setCurrentComments(comments))
+      })
   }
 }
 
-function setCurrentComments(comments){
+export function addComment(comment) {
+  return({
+    type: "ADD_COMMENT",
+    payload: comment
+  })
+}
+
+export function setCurrentComments(comments){
+  console.log("setCurrentComments", comments)
   return {
     type: "SET_CURRENT_COMMENTS",
     payload: comments

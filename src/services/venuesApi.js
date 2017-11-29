@@ -8,14 +8,18 @@ export default class VenuesApi {
 
   static postComments(params) {
     console.log("params", params)
-    return fetch(`http://localhost:3000/venue/${params.comment.id}/comment`, {
-      method: "post",
+    return fetch(`http://localhost:3000/venues/${params.id}/comments`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
       body: JSON.stringify(params)
-    }).then(res => res.json())
+    })
   }
 
+  static fetchComments(id){
+    return fetch(`http://localhost:3000/venues/${id}/comments`)
+      .then(res => res.json())
+  }
 }

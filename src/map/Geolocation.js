@@ -6,7 +6,7 @@ function handleGottenPosition(pos) {
 
   export function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(handleGottenPosition)
+      return navigator.geolocation.getCurrentPosition(handleGottenPosition)
     } else {
       alert("Geolocation is not supported by this browser.");
     }

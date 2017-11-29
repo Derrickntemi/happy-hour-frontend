@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Comment, Form, Header, Input } from 'semantic-ui-react'
-import { postCommentsAction } from '../actions/venues.js'
+import { findCommentsById } from '../helpers/findCommentsById'
+import { setCurrentComments, addComment, fetchCommentsAction } from '../actions/venues.js'
+import VenuesApi from "../services/venuesApi";
+
+
 
 
 class CommentContainer extends Component {
 
   state = {
-    comment: null,
-    name: null,
+    comment: '',
+    name: '',
     id: parseInt(this.props.match.params.id, 10),
   }
 
@@ -24,16 +28,20 @@ class CommentContainer extends Component {
   handleSubmitComment = (event) => {
     event.preventDefault()
     const commentObj = {
-      comment: {
-        comment: this.state.comment,
-        name: this.state.name,
-        id: this.state.id
-      }
+      comments: this.state.comment,
+      user_name: this.state.name,
+      id: this.state.id
     }
     if(this.props.venues.length > 0){
-      this.props.postCommentsAction(commentObj)
-      console.log("comment state", this.state)
+      this.props.addComment(commentObj)
     }
+    VenuesApi.postComments(commentObj)
+    .then(
+      this.setState({
+        comment: '',
+        name: ''
+      })
+    )
   }
 
   handleCommentChange = (event) => {
@@ -48,7 +56,27 @@ class CommentContainer extends Component {
     })
   }
 
+  showComments = () => {
+    if(this.props.currentComments){
+      console.log("this you dumb comp", findCommentsById(this.state.id, this.props.currentComments))
+      return findCommentsById(this.state.id, this.props.currentComments).map((comment, idx) => {
+        console.log("whats the comment", comment)
+        return (
+          <div key={idx} className="display-comment-div">
+            <h4>{comment.user_name}</h4>
+            <p>{comment.comments}</p>
+          </div>
+        )
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.props.fetchCommentsAction(this.state.id)
+  }
+
   render(){
+    console.log("currentComments Render", this.props.currentComments)
     return(
       <div className="comment-form-wrapper">
         <Comment.Group>
@@ -56,21 +84,19 @@ class CommentContainer extends Component {
           <Comment>
             <Comment.Content>
               <Comment.Author as={this.state.name}></Comment.Author>
-              <Comment.Metadata>
-                <div>{this.getDate()}</div>
-              </Comment.Metadata>
+
               <Comment.Text>{this.state.comment}</Comment.Text>
               <Comment.Actions>
-                <Comment.Action>Reply</Comment.Action>
               </Comment.Actions>
-              <Input placeholder="Your Name Here" onChange={this.handleNameChange}/>
+              <Input placeholder="Your Name Here" onChange={this.handleNameChange} value={this.state.name}/>
             </Comment.Content>
           </Comment>
           <Form reply>
-            <Form.TextArea onChange={this.handleCommentChange}/>
+            <Form.TextArea onChange={this.handleCommentChange} value={this.state.comment}/>
             <Button onClick={this.handleSubmitComment} content='Add Comment' labelPosition='left' icon='comment' primary />
           </Form>
         </Comment.Group>
+        {this.showComments()}
       </div>
     )
   }
@@ -79,11 +105,14 @@ class CommentContainer extends Component {
 function mapStateToProps(state) {
   return ({
     venues: state.venues,
+    currentComments: state.currentComments
   })
 }
 
 const mapDispatchToProps = {
-  postCommentsAction,
+  setCurrentComments,
+  addComment,
+  fetchCommentsAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentContainer)
