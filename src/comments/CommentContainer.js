@@ -32,9 +32,9 @@ class CommentContainer extends Component {
       user_name: this.state.name,
       id: this.state.id
     }
-    if(this.props.venues.length > 0){
-      this.props.addComment(commentObj)
-    }
+
+    this.props.addComment(commentObj)
+      
     VenuesApi.postComments(commentObj)
     .then(
       this.setState({

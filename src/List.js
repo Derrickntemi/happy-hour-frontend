@@ -10,8 +10,8 @@ class List extends React.Component {
     const venues = this.props.currentVenues.map((venue, idx) => {
       const special = venue.specials.find(special => {
         return special.day.toLowerCase() === this.props.currentDay.toLowerCase()})
-      const deal = special.special
-      const time = special.time
+      const deal = special && special.special
+      const time = special && special.time
       return(
         <tr key={idx}>
           <td><Link to={`/venue/${venue.id}`}>{venue.venue_name}</Link></td>

@@ -3,7 +3,6 @@ import GoogleMapReact from 'google-map-react';
 import { Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { getLocation } from './Geolocation'
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
@@ -35,9 +34,6 @@ class MapContainer extends React.Component {
   }
 
   componentDidMount() {
-    if (getLocation()) {
-      console.log("get location", getLocation())
-    }
     if(this.props.currentVenues.length){
       this.getAverageLatLng(this.props.currentVenues)
     }
@@ -48,6 +44,7 @@ class MapContainer extends React.Component {
       return <AnyReactComponent lat={venue.latitude} lng={venue.longitude} key={idx}/>
     })
   }
+
 
   render() {
     return (
@@ -68,8 +65,7 @@ class MapContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    currentVenues: state.currentVenues,
-    venues: state.venues
+    currentVenues: state.currentVenues
   }
 }
 
