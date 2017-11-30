@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Comment, Header } from 'semantic-ui-react'
+import { Comment } from 'semantic-ui-react'
 import {   fetchCommentsAction, addComment } from '../actions/venues.js'
 import { findCommentsById } from '../helpers/findCommentsById'
 
@@ -27,7 +27,6 @@ class CommentList extends Component {
   }
 
   render(){
-    console.log("currentComments", this.props.currentComments)
     return(
       <div className="display-comment-div">
         {this.showComments()}

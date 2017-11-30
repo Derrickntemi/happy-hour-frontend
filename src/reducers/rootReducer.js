@@ -1,5 +1,13 @@
 export default function rootReducer(
-  state = { venues: [], currentVenues: [], currentDay: "", currentComments: [], userLocation: [], isLoading: false },
+  state = {
+    venues: [],
+    currentVenues: [],
+    currentDay: "",
+    currentComments: [],
+    userLocation: [],
+    lastVenueSearched: [],
+    isLoading: false
+  },
   action
 ) {
   switch(action.type) {
@@ -15,6 +23,8 @@ export default function rootReducer(
       return (Object.assign({}, state, {userLocation: action.payload}))
     case "ADD_COMMENT":
       return (Object.assign({}, state, {currentComments: state.currentComments.concat(action.payload)}))
+    case "LAST_VENUE_SEARCHED":
+      return (Object.assign({}, state, { lastVenueSearched: state.lastVenueSearched.concat(action.payload)}))
     default:
       return state;
   }

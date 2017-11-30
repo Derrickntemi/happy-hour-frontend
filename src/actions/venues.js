@@ -80,3 +80,12 @@ export function setShowVenue(id) {
     payload: id
   }
 }
+
+export function setLastVenueSearched(venue){
+  return function(dispatch) {
+    dispatch({
+      type: "LAST_VENUE_SEARCHED",
+      payload: venue
+    })
+  }
+}

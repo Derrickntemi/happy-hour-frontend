@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { findVenueById } from './helpers/findVenueById'
-import MapContainer from './map/MapContainer'
-import { setCurrentVenues } from './actions/venues.js'
-import CommentContainer from './comments/CommentContainer'
+import { findVenueById } from '../helpers/findVenueById'
+import MapContainer from '../map/MapContainer'
+import { setCurrentVenues } from '../actions/venues.js'
+import CommentContainer from '../comments/CommentContainer'
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 

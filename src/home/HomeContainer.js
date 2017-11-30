@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import MapContainer from './map/MapContainer';
+import MapContainer from '../map/MapContainer';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Select, Card } from 'semantic-ui-react';
-import { sortedByDayAndNeighborhood } from './actions/venues.js'
+import { sortedByDayAndNeighborhood, setLastVenueSearched } from '../actions/venues.js'
 import List from './List.js'
-import { dayOptions, neighborhoodOptions } from './helpers/selectOptions'
+import { dayOptions, neighborhoodOptions } from '../helpers/selectOptions'
 
 
 class HomeContainer extends Component {
@@ -26,8 +26,17 @@ class HomeContainer extends Component {
     })
   }
 
+  componentDidMount = () => {
+    if(this.props.setLastVenueSearched.length){
+
+    }
+  }
+
   handleSubmit = () => {
-    this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
+    const search = this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
+    console.log("searched", search)
+    this.props.setLastVenueSearched(search)
+    console.log("last searched", this.props.setLastVenueSearched(search))
   }
 
 
@@ -86,6 +95,7 @@ function mapStateToProps(state){
 
 const mapDispatchToProps = {
   sortedByDayAndNeighborhood,
+  setLastVenueSearched,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)

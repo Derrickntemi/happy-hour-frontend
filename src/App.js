@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import HomeContainer from './HomeContainer'
+import HomeContainer from './home/HomeContainer'
 import Navbar from './Navbar'
-import ShowVenue from './ShowVenue'
+import ShowVenue from './home/ShowVenue'
 import { fetchVenuesAction } from './actions/venues.js'
 
 class App extends Component {

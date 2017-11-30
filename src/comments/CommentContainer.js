@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Comment, Form, Header, Input } from 'semantic-ui-react'
-import { findCommentsById } from '../helpers/findCommentsById'
-import { setCurrentComments, addComment, fetchCommentsAction } from '../actions/venues.js'
+import { setCurrentComments, addComment } from '../actions/venues.js'
 import VenuesApi from "../services/venuesApi";
 import CommentList from './CommentList'
 
@@ -17,7 +16,7 @@ class CommentContainer extends Component {
     id: parseInt(this.props.match.params.id, 10),
   }
 
-  
+
 
   handleSubmitComment = (event) => {
     event.preventDefault()
