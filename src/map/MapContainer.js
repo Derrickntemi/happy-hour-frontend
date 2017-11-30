@@ -4,6 +4,8 @@ import { Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import geolib from 'geolib'
+import findDistance from '../helpers/findDistance.js'
+import { setCurrentVenues } from '../actions/venues.js'
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
@@ -38,6 +40,14 @@ class MapContainer extends React.Component {
         center: [nextProps.userLocation[0], nextProps.userLocation[1]],
         zoom: 15
       })
+      const distanceArray = this.props.venues.map((venue, idx) => {
+        const distance = findDistance(nextProps.userLocation[0], nextProps.userLocation[1], venue.latitude, venue.longitude)
+        return Object.assign({}, venue, { distance: distance })
+      })
+      const sortedByDistance = _.sortBy(distanceArray, ["distance"])
+      const nearestVenues = sortedByDistance.slice(0, 20)
+      this.props.setCurrentVenues(nearestVenues)
+      
     } else if(nextProps.currentVenues.length) {
       this.getAverageLatLng(nextProps.currentVenues)
     }
@@ -85,4 +95,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, null)(MapContainer)
+const mapDispatchToProps = {
+  setCurrentVenues,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)
