@@ -17,21 +17,14 @@ class CommentContainer extends Component {
     id: parseInt(this.props.match.params.id, 10),
   }
 
-  // getDate = () => {
-  //   const dateObj = new Date();
-  //   const month = dateObj.getUTCMonth() + 1;
-  //   const day = dateObj.getUTCDate();
-  //   const year = dateObj.getUTCFullYear();
-  //   const newDate = month + "/" + day + "/" + year;
-  //   return newDate
-  // }
+  
 
   handleSubmitComment = (event) => {
     event.preventDefault()
     const commentObj = {
       comments: this.state.comment,
       user_name: this.state.name,
-      id: this.state.id
+      venue_id: this.state.id
     }
     this.props.addComment(commentObj)
 
@@ -62,22 +55,13 @@ class CommentContainer extends Component {
       <div className="comment-form-wrapper">
         <Comment.Group>
           <Header as='h3' dividing>Comments</Header>
-          <Comment>
-            <Comment.Content>
-              <Comment.Author as={this.state.name}></Comment.Author>
-
-              <Comment.Text>{this.state.comment}</Comment.Text>
-              <Comment.Actions>
-              </Comment.Actions>
-              <Input placeholder="Your Name Here" onChange={this.handleNameChange} value={this.state.name}/>
-            </Comment.Content>
-          </Comment>
           <Form reply>
+            <Input placeholder="Your Name Here" onChange={this.handleNameChange} value={this.state.name}/>
             <Form.TextArea onChange={this.handleCommentChange} value={this.state.comment}/>
             <Button onClick={this.handleSubmitComment} content='Add Comment' labelPosition='left' icon='comment' primary />
           </Form>
+          < CommentList id={this.state.id}/>
         </Comment.Group>
-        < CommentList id={this.state.id}/>
       </div>
     )
   }

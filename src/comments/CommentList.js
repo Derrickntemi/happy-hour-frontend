@@ -7,22 +7,27 @@ import { findCommentsById } from '../helpers/findCommentsById'
 
 class CommentList extends Component {
 
-  showComments = () => {
+  componentDidMount(){
     this.props.fetchCommentsAction(this.props.id)
+  }
+
+  showComments = () => {
     if(this.props.currentComments){
-      return findCommentsById(this.props.id, this.props.currentComments).map((comment, idx) => {
+      return findCommentsById(this.props.id, this.props.currentComments).reverse().map((comment, idx) => {
         return (
-          <Comment.Content key={idx} className="display-comment-content">
-            <Header as='h3' dividing></Header>
-            <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
-            <Comment.Text>{comment.comments}</Comment.Text>
-          </Comment.Content>
+          <Comment>
+            <Comment.Content key={idx} className="display-comment-content">
+              <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
+              <Comment.Text>{comment.comments}</Comment.Text>
+            </Comment.Content>
+          </Comment>
         )
       })
     }
   }
 
   render(){
+    console.log("currentComments", this.props.currentComments)
     return(
       <div className="display-comment-div">
         {this.showComments()}

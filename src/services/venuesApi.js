@@ -7,7 +7,7 @@ export default class VenuesApi {
   }
 
   static postComments(params) {
-    return fetch(`http://localhost:3000/venues/${params.id}/comments`, {
+    return fetch(`http://localhost:3000/venues/${params.venue_id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
