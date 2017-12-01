@@ -24,7 +24,7 @@ export default function rootReducer(
     case "ADD_COMMENT":
       return (Object.assign({}, state, {currentComments: state.currentComments.concat(action.payload)}))
     case "LAST_VENUE_SEARCHED":
-      return (Object.assign({}, state, { lastVenueSearched: state.lastVenueSearched.concat(action.payload)}))
+      return (Object.assign({}, state, {lastVenueSearched: action.payload}))
     default:
       return state;
   }

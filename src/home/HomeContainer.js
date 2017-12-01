@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from '../map/MapContainer';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Select, Card } from 'semantic-ui-react';
-import { sortedByDayAndNeighborhood, setLastVenueSearched } from '../actions/venues.js'
+import { sortedByDayAndNeighborhood, setLastVenueSearched, setCurrentVenues } from '../actions/venues.js'
 import List from './List.js'
 import { dayOptions, neighborhoodOptions } from '../helpers/selectOptions'
 
@@ -27,16 +27,15 @@ class HomeContainer extends Component {
   }
 
   componentDidMount = () => {
-    if(this.props.setLastVenueSearched.length){
-
+    if(this.props.lastVenueSearched.length){
+      this.props.setCurrentVenues(this.props.lastVenueSearched)
+      console.log("this.props.lastVenueSearched", this.props.lastVenueSearched)
     }
   }
 
   handleSubmit = () => {
-    const search = this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
-    console.log("searched", search)
-    this.props.setLastVenueSearched(search)
-    console.log("last searched", this.props.setLastVenueSearched(search))
+    this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
+  
   }
 
 
@@ -89,13 +88,15 @@ function mapStateToProps(state){
   return ({
     venues: state.venues,
     isLoading: state.isLoading,
-    currentVenues: state.currentVenues
+    currentVenues: state.currentVenues,
+    lastVenueSearched: state.lastVenueSearched
   })
 }
 
 const mapDispatchToProps = {
   sortedByDayAndNeighborhood,
   setLastVenueSearched,
+  setCurrentVenues,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)

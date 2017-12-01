@@ -13,6 +13,8 @@ class List extends React.Component {
     return weekdays[today.getDay()]
   }
 
+
+
   render() {
     const venues = this.props.currentVenues.map((venue, idx) => {
       const day = this.props.userLocation.length ? this.dayOfWeekAsString().toLowerCase() : this.props.currentDay.toLowerCase()

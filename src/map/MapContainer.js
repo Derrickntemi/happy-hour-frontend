@@ -4,7 +4,7 @@ import { Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import findDistance from '../helpers/findDistance.js'
-import { setCurrentVenues } from '../actions/venues.js'
+import { setCurrentVenues, setLastVenueSearched } from '../actions/venues.js'
 
 const AnyReactComponent = ({ text }) => (
   <div style={{
@@ -47,9 +47,14 @@ class MapContainer extends React.Component {
       const sortedByDistance = _.sortBy(distanceArray, ["distance"])
       const nearestVenues = sortedByDistance.slice(0, 20)
       this.props.setCurrentVenues(nearestVenues)
+      this.props.setLastVenueSearched(nearestVenues)
+      console.log("nearest", this.props.lastVenueSearched)
 
     } else if(nextProps.currentVenues.length) {
       this.getAverageLatLng(nextProps.currentVenues)
+      nextProps.setLastVenueSearched(nextProps.currentVenues)
+      console.log("searched venue", this.props.lastVenueSearched)
+
     }
   }
 
@@ -57,10 +62,6 @@ class MapContainer extends React.Component {
     if(this.props.currentVenues.length){
       this.getAverageLatLng(this.props.currentVenues)
     }
-  }
-
-  displayNearestLocations = () => {
-
   }
 
   outputMarkers = () => {
@@ -92,11 +93,15 @@ function mapStateToProps(state) {
     currentVenues: state.currentVenues,
     venues: state.venues,
     userLocation: state.userLocation,
+    lastVenueSearched: state.lastVenueSearched
+
   }
 }
 
 const mapDispatchToProps = {
   setCurrentVenues,
+  setLastVenueSearched,
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapContainer)

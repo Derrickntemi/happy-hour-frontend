@@ -15,8 +15,8 @@ class CommentList extends Component {
     if(this.props.currentComments){
       return findCommentsById(this.props.id, this.props.currentComments).reverse().map((comment, idx) => {
         return (
-          <Comment>
-            <Comment.Content key={idx} className="display-comment-content">
+          <Comment key={idx} className="display-comment-content">
+            <Comment.Content>
               <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
               <Comment.Text>{comment.comments}</Comment.Text>
             </Comment.Content>

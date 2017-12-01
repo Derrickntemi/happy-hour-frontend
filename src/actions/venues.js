@@ -47,6 +47,7 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
         return special.day.toLowerCase() === day.toLowerCase()})
     })
     dispatch(setCurrentVenues(sortedVenues))
+    dispatch(setLastVenueSearched(sortedVenues))
     dispatch(setCurrentDay(day))
   }
 }
@@ -81,11 +82,9 @@ export function setShowVenue(id) {
   }
 }
 
-export function setLastVenueSearched(venue){
-  return function(dispatch) {
-    dispatch({
-      type: "LAST_VENUE_SEARCHED",
-      payload: venue
-    })
+export function setLastVenueSearched(sortedVenues){
+  return{
+    type: "LAST_VENUE_SEARCHED",
+    payload: sortedVenues
   }
 }
