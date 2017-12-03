@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { findVenueById } from '../helpers/findVenueById'
 import MapContainer from '../map/MapContainer'
 import { setCurrentVenues } from '../actions/venues.js'
 import CommentContainer from '../comments/CommentContainer'
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import Edit from './Edit.js'
 
 
 class ShowVenue extends React.Component {
@@ -36,7 +38,6 @@ class ShowVenue extends React.Component {
     if(this.props.venues.length > 0){
       this.setVenueData(this.props.match.params.id, this.props.venues)
     }
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,6 +57,7 @@ class ShowVenue extends React.Component {
                 {this.state.venue.city}, {this.state.venue.state} {this.state.venue.zipcode}
               </h3>
               <h3>{this.state.venue.phone_number}</h3>
+              <Link to={`/venue/${this.state.venue.id}/edit`}>Edit this listing</Link>
           </div>
           <MapContainer />
           <div className="venue-specials-table-wrapper">

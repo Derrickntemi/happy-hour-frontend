@@ -5,21 +5,34 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import findDistance from '../helpers/findDistance.js'
 import { setCurrentVenues, setLastVenueSearched } from '../actions/venues.js'
+import { Popup } from 'semantic-ui-react'
 
-const AnyReactComponent = ({ text }) => (
-  <div style={{
-    position: 'relative', color: 'white', background: 'red',
-    height: 6, width: 6, top: -20, left: -30,
-  }}>
-    {text}
-  </div>
+
+const Marker = ({ venue }) => (
+  // <div onClick={() => handleMarkerClick(venue)}>
+  //   <div className="pin1" />
+  //   {
+  //     _.isEqual(venue, markerClicked) &&
+  //     <div className="marker-wrapper">
+  //       <div className="venue-name">{venue.venue_name}</div>
+  //     </div>
+  //   }
+  // </div>
+
+  <Popup
+   className="marker-pop-up"
+   trigger={ <div className="pin1" />}
+   content={venue.venue_name}
+   on='hover'
+ />
 );
 
 class MapContainer extends React.Component {
 
   state = {
     center: [40.74, -73.99],
-    zoom: 12
+    zoom: 12,
+    markerClicked: null
   }
 
   getAverageLatLng = (currentVenues) => {
@@ -66,10 +79,18 @@ class MapContainer extends React.Component {
 
   outputMarkers = () => {
     return this.props.currentVenues.map((venue, idx) => {
-      return <AnyReactComponent lat={venue.latitude} lng={venue.longitude} key={idx}/>
+      return (
+        <Marker
+          lat={venue.latitude}
+          lng={venue.longitude}
+          key={idx}
+          venue={venue}
+          handleMarkerClick={this.handleMarkerClick}
+          markerClicked={this.state.markerClicked}
+        />
+      )
     })
   }
-
 
   render() {
     return (

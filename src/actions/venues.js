@@ -9,6 +9,7 @@ export function fetchVenuesAction() {
   }
 }
 
+
 export function fetchCommentsAction(id) {
   return function(dispatch) {
     VenuesApi.fetchComments(id)
@@ -72,13 +73,6 @@ export function setCurrentDay(day) {
   return {
     type: "SET_CURRENT_DAY",
     payload: day
-  }
-}
-
-export function setShowVenue(id) {
-  return {
-    type: "SET_SHOW_VENUE",
-    payload: id
   }
 }
 

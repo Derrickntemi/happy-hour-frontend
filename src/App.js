@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeContainer from './home/HomeContainer'
 import Navbar from './Navbar'
 import ShowVenue from './home/ShowVenue'
+import Edit from './home/Edit.js'
 import { fetchVenuesAction } from './actions/venues.js'
 
 class App extends Component {
@@ -18,7 +18,9 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Route exact path="/" component={HomeContainer} />
-        <Route path="/venue/:id" component={ShowVenue} />
+        <Route exact path="/venue/:id" component={ShowVenue} />
+        <Route path="/venue/:id/edit" component={Edit} />
+
       </div>
     );
   }

@@ -10,8 +10,8 @@ import { dayOptions, neighborhoodOptions } from '../helpers/selectOptions'
 class HomeContainer extends Component {
 
   state = {
-    dayInput: "Sunday",
-    neighborhoodInput: "Astoria",
+    dayInput: "",
+    neighborhoodInput: "",
   }
 
   handleInputDayChange = (event, data) => {
@@ -35,7 +35,7 @@ class HomeContainer extends Component {
 
   handleSubmit = () => {
     this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
-  
+
   }
 
 

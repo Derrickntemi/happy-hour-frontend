@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "geocoder": "^0.2.3",
     "geolib": "^2.0.24",
     "google-map-react": "^0.25.0",
     "lodash": "^4.17.4",
