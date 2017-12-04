@@ -9,16 +9,6 @@ import { Popup } from 'semantic-ui-react'
 
 
 const Marker = ({ venue }) => (
-  // <div onClick={() => handleMarkerClick(venue)}>
-  //   <div className="pin1" />
-  //   {
-  //     _.isEqual(venue, markerClicked) &&
-  //     <div className="marker-wrapper">
-  //       <div className="venue-name">{venue.venue_name}</div>
-  //     </div>
-  //   }
-  // </div>
-
   <Popup
    className="marker-pop-up"
    trigger={ <div className="pin1" />}
@@ -85,8 +75,6 @@ class MapContainer extends React.Component {
           lng={venue.longitude}
           key={idx}
           venue={venue}
-          handleMarkerClick={this.handleMarkerClick}
-          markerClicked={this.state.markerClicked}
         />
       )
     })

@@ -19,7 +19,7 @@ class List extends React.Component {
     const venues = this.props.currentVenues.map((venue, idx) => {
       const day = this.props.userLocation.length ? this.dayOfWeekAsString().toLowerCase() : this.props.currentDay.toLowerCase()
       const special = venue.specials.find(special => special.day.toLowerCase() === day)
-      if (special && special.special !== "None") {
+      if (special && special.special) {
         return(
           <Table.Row key={idx}>
             <Table.Cell><Link to={`/venue/${venue.id}`}>{venue.venue_name}</Link></Table.Cell>
@@ -34,7 +34,7 @@ class List extends React.Component {
       <div className="results-table-wrapper">
         {this.props.isLoading ? <p>Loading</p> : null}
         {!this.props.currentVenues.length ? null :
-          <Table celled className="ui celled table results-table">
+          <Table celled className="results-table">
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Bar Name</Table.HeaderCell>

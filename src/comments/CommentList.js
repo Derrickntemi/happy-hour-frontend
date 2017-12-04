@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Comment } from 'semantic-ui-react'
+import { Comment, Card} from 'semantic-ui-react'
 import {   fetchCommentsAction, addComment } from '../actions/venues.js'
 import { findCommentsById } from '../helpers/findCommentsById'
 
@@ -15,12 +15,16 @@ class CommentList extends Component {
     if(this.props.currentComments){
       return findCommentsById(this.props.id, this.props.currentComments).reverse().map((comment, idx) => {
         return (
-          <Comment key={idx} className="display-comment-content">
-            <Comment.Content>
-              <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
-              <Comment.Text>{comment.comments}</Comment.Text>
-            </Comment.Content>
-          </Comment>
+          <Card.Group key={idx} className="display-comment-content">
+            <Card fluid color="#00b17c">
+              <Comment >
+                <Comment.Content>
+                  <Comment.Author><strong>{comment.user_name}</strong></Comment.Author>
+                  <Comment.Text>{comment.comments}</Comment.Text>
+                </Comment.Content>
+              </Comment>
+            </Card>
+          </Card.Group>
         )
       })
     }
@@ -28,9 +32,9 @@ class CommentList extends Component {
 
   render(){
     return(
-      <div className="display-comment-div">
+      <Comment className="display-comment-div">
         {this.showComments()}
-      </div>
+      </Comment>
     )
   }
 

@@ -5,7 +5,7 @@ import { findVenueById } from '../helpers/findVenueById'
 import MapContainer from '../map/MapContainer'
 import { setCurrentVenues } from '../actions/venues.js'
 import CommentContainer from '../comments/CommentContainer'
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import { Dimmer, Loader, Image, Segment, Grid } from 'semantic-ui-react'
 
 
 class ShowVenue extends React.Component {
@@ -51,29 +51,38 @@ class ShowVenue extends React.Component {
         <div>
           <div className="venue-info-wrapper">
             <h1>{this.state.venue.venue_name}</h1>
-              <h3>{this.state.venue.address}</h3>
-              <h3>
+              <h5>{this.state.venue.address}</h5>
+              <h5>
                 {this.state.venue.city}, {this.state.venue.state} {this.state.venue.zipcode}
-              </h3>
+              </h5>
               <h3>{this.state.venue.phone_number}</h3>
               <Link to={`/venue/${this.state.venue.id}/edit`}>Edit this listing</Link>
           </div>
           <MapContainer />
-          <div className="venue-specials-table-wrapper">
-            <table className="ui celled table venue-specials-table">
-              <thead>
-                <tr>
-                  <th>Day</th>
-                  <th>Special</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.getSpecialsDetails(this.state.venue)}
-              </tbody>
-            </table>
-            < CommentContainer match={this.props.match}/>
-          </div>
+          <Grid className="venue-specials-table-wrapper">
+            <Grid.Row>
+              <Grid.Column width={1}>
+              </Grid.Column>
+              <Grid.Column width={14}>
+                <table className="ui celled table venue-specials-table">
+                  <thead>
+                    <tr>
+                      <th>Day</th>
+                      <th>Special</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.getSpecialsDetails(this.state.venue)}
+                  </tbody>
+                </table>
+              </Grid.Column>
+              <Grid.Column width={1}>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          < CommentContainer match={this.props.match}/>
+
         </div>
       )
     } else {

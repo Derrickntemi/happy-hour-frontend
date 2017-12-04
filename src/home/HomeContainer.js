@@ -46,7 +46,7 @@ class HomeContainer extends Component {
         <Grid.Row>
           <Grid.Column width={4}>
             <Card >
-              <Card.Content>
+              <Card.Content className="search-form-card">
                 <Form className="search-form-wrapper">
                   <Form.Field  >
                     <label htmlFor="day" className="day-label">Day of the Week</label>
@@ -84,7 +84,16 @@ class HomeContainer extends Component {
             <MapContainer />
           </Grid.Column>
         </Grid.Row>
-        <List />
+        <Grid.Row>
+          <Grid.Column width={1}>
+          </Grid.Column>
+          <Grid.Column width={14}>
+            <List />
+          </Grid.Column>
+          <Grid.Column width={1}>
+          </Grid.Column>
+        </Grid.Row>
+
       </Grid>
     );
   }

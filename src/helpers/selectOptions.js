@@ -11,6 +11,7 @@ export const dayOptions = [
 
 export const neighborhoodOptions = [
   {value: "Astoria", text: "Astoria"},
+  {value: "Battery Park", text: "Battery Park"},
   {value: "Chelsea", text: "Chelsea"},
   {value: "East Village", text: "East Village"},
   {value: "Financial District", text: "Financial District"},
@@ -28,12 +29,22 @@ export const neighborhoodOptions = [
   {value: "Murray Hill", text: "Murray Hill"},
   {value: "NoHo", text: "NoHo"},
   {value: "Nolita", text: "Nolita"},
+  {value: "North Massapequa", text: "North Massapequa"},
+  {value: "North Bergen", text: "North Bergen"},
   {value: "Park Slope", text: "Park Slope"},
   {value: "SoHo", text: "SoHo"},
+  {value: "South Orange", text: "South Orange"},
+  {value: "South Slope", text: "South Slope"},
+  {value: "South Street Seaport", text: "South Street Seaport"},
+  {value: "South Village", text: "South Village"},
   {value: "Theater District", text: "Theater District"},
   {value: "TriBeCa", text: "TriBeCa"},
   {value: "Union Square", text: "Union Square"},
   {value: "Upper West Side", text: "Upper West Side"},
   {value: "West Village", text: "West Village"},
-  {value: "Williamsburg", text: "Williamsburg"}
+  {value: "Williamsburg", text: "Williamsburg"},
+  {value: "South Williamsburg", text: "South Williamsburg"},
+  {value: "Williamsburg - South Side", text: "Williamsburg - South Side"},
+  {value: "Williamsburg - North Side", text: "Williamsburg - North Side"}
+
 ]

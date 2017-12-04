@@ -44,7 +44,7 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
   return function(dispatch) {
     const sortedVenues = allVenues.filter((venue) => {
 
-      return venue.neighborhood.toLowerCase() === neighborhood.toLowerCase() && !!venue.specials.find(special => {
+      return venue.neighborhood === neighborhood && !!venue.specials.find(special => {
         return special.day.toLowerCase() === day.toLowerCase()})
     })
     dispatch(setCurrentVenues(sortedVenues))

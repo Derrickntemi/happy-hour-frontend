@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import geocoder from 'geocoder'
-import { Button, Form, Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import { Button, Form, Dimmer, Loader, Image, Segment, Grid } from 'semantic-ui-react'
 import { findVenueById } from '../helpers/findVenueById'
 import { setCurrentVenues } from '../actions/venues.js'
 
@@ -155,36 +155,44 @@ class Edit extends React.Component {
   render(){
     if(this.state.venue){
       return(
-        <div className="edit-listing-form">
-          <Form>
-            <Form.Field>
-              <label>Venue Name</label>
-              <input onChange={(e) => this.handleInputChange("name", e.target.value)} value={this.state.name} />
-            </Form.Field>
-            <Form.Field>
-              <label>Venue Address</label>
-              <input onChange={(e) => this.handleInputChange("address", e.target.value)} value={this.state.address} />
-            </Form.Field>
-            <Form.Field>
-              <label>City</label>
-              <input onChange={(e) => this.handleInputChange("city", e.target.value)} value={this.state.city} />
-            </Form.Field>
-            <Form.Field>
-              <label>State</label>
-              <input onChange={(e) => this.handleInputChange("state", e.target.value)} value={this.state.state} />
-            </Form.Field>
-            <Form.Field>
-              <label>Zipcode</label>
-              <input onChange={(e) => this.handleInputChange("zipcode", e.target.value)} value={this.state.zipcode} />
-            </Form.Field>
-            <Form.Field>
-              <label>Phone Number</label>
-              <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number} />
-            </Form.Field>
-            {this.getSpecialsDetails(this.state.venue)}
-            <Button onClick={this.handleEditSubmit} type='submit'>Edit</Button>
-          </Form>
-        </div>
+        <Grid className="edit-listing-form">
+          <Grid.Row>
+          <Grid.Column width={2}>
+          </Grid.Column>
+            <Grid.Column width={12}>
+              <Form><h1 className="edit-form-heading">Edit This Listing!</h1>
+                <Form.Field>
+                  <label>Venue Name</label>
+                  <input onChange={(e) => this.handleInputChange("name", e.target.value)} value={this.state.name} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Venue Address</label>
+                  <input onChange={(e) => this.handleInputChange("address", e.target.value)} value={this.state.address} />
+                </Form.Field>
+                <Form.Field>
+                  <label>City</label>
+                  <input onChange={(e) => this.handleInputChange("city", e.target.value)} value={this.state.city} />
+                </Form.Field>
+                <Form.Field>
+                  <label>State</label>
+                  <input onChange={(e) => this.handleInputChange("state", e.target.value)} value={this.state.state} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Zipcode</label>
+                  <input onChange={(e) => this.handleInputChange("zipcode", e.target.value)} value={this.state.zipcode} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Phone Number</label>
+                  <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number} />
+                </Form.Field>
+                {this.getSpecialsDetails(this.state.venue)}
+                <Button onClick={this.handleEditSubmit} type='submit'>Edit</Button>
+              </Form>
+          </Grid.Column>
+          <Grid.Column width={2}>
+          </Grid.Column>
+        </Grid.Row>
+        </Grid>
       )
     }
     return (

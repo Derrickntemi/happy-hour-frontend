@@ -18,16 +18,18 @@ body {
   color: yellow;
 }
 
-.results-table-wrapper {a
-  margin: 50px;
+.results-table-wrapper {
 }
 
 .neighborhood-label {
   text-align: center;
+  background-color: #00b17c;
 }
 
 .day-label {
   text-align: center;
+  background-color: #00b17c;
+
 }
 
 .form-button {
@@ -64,4 +66,16 @@ body {
   padding: 25px;
   background: #fff;
   width: 185px;
+}
+
+.edit-form-heading {
+  text-align: center;
+}
+
+.venue-info-wrapper {
+  text-align: center;
+}
+
+.display-comment-div {
+  text-align: center;
 }
