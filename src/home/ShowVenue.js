@@ -6,7 +6,6 @@ import MapContainer from '../map/MapContainer'
 import { setCurrentVenues } from '../actions/venues.js'
 import CommentContainer from '../comments/CommentContainer'
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
-import Edit from './Edit.js'
 
 
 class ShowVenue extends React.Component {

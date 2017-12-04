@@ -5,6 +5,8 @@ import HomeContainer from './home/HomeContainer'
 import Navbar from './Navbar'
 import ShowVenue from './home/ShowVenue'
 import Edit from './home/Edit.js'
+import Add from './home/Add.js'
+
 import { fetchVenuesAction } from './actions/venues.js'
 
 class App extends Component {
@@ -20,7 +22,7 @@ class App extends Component {
         <Route exact path="/" component={HomeContainer} />
         <Route exact path="/venue/:id" component={ShowVenue} />
         <Route path="/venue/:id/edit" component={Edit} />
-
+        <Route path="/venues/create" component={Add} />
       </div>
     );
   }

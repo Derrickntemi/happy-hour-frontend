@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import geocoder from 'geocoder'
-import HomeContainer from './HomeContainer'
 import { Button, Form, Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 import { findVenueById } from '../helpers/findVenueById'
 import { setCurrentVenues } from '../actions/venues.js'

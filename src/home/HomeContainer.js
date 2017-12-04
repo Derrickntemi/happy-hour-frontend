@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import MapContainer from '../map/MapContainer';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import MapContainer from '../map/MapContainer';
 import { Button, Form, Grid, Select, Card } from 'semantic-ui-react';
 import { sortedByDayAndNeighborhood, setLastVenueSearched, setCurrentVenues } from '../actions/venues.js'
 import List from './List.js'
@@ -71,6 +72,11 @@ class HomeContainer extends Component {
                   </Form.Field>
                   <Button type="submit" onClick={this.handleSubmit} className="form-button">Search</Button >
                 </Form>
+              </Card.Content>
+            </Card>
+            <Card>
+              <Card.Content>
+                <Link to="/venues/create">Add a New Listing</Link>
               </Card.Content>
             </Card>
           </Grid.Column>
