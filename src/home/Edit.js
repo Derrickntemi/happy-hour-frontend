@@ -77,10 +77,15 @@ class Edit extends React.Component {
     }
   }
 
+  handleInputChange = (input, value) => {
+    this.setState({
+      [input]: value
+    })
+  }
 
   setVenueData = (id, venues) => {
     const venue = findVenueById(parseInt(id, 10), venues)
-    console.log("this venue", venue)
+    console.log("this venue", venue.id)
     this.props.setCurrentVenues([venue])
     this.setState({
       venue: venue,
@@ -94,6 +99,12 @@ class Edit extends React.Component {
     })
   }
 
+  componentDidMount(){
+    if(this.props.venues.length > 0){
+      this.setVenueData(this.props.match.params.id, this.props.venues)
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.venues.length > 0){
       console.log("logged venues", nextProps.venues)
@@ -101,58 +112,46 @@ class Edit extends React.Component {
     }
   }
 
-  handleInputChange = (input, value) => {
-    this.setState({
-      [input]: value
-    })
-  }
-
-  getLatAndLong = () => {
-    console.log("address", this.state.address)
-    const address = `${this.state.address} ${this.state.city}, ${this.state.state} ${this.state.zipcode}`
-    return geocoder.geocode(address, (err, results) => {
-      results.forEach((result) => {
-        const lat = result.geometry.location.lat();
-        console.log("latitude", lat)
-        console.log("longitude", lng)
-
-        const lng = result.geometry.location.lng();
-        this.setState({
-          latitude: lat,
-          longitude: lng,
-        })
-      })
-    })
-  }
-
   handleEditSubmit = () => {
-    this.getLatAndLong()
-    if(this.state.latitude > 0){
-      const editVenueObj = {
-        name: this.state.name,
-        address: this.state.address,
-        city: this.state.city,
-        state: this.state.state,
-        zipcode: this.state.zipcode,
-        number: this.state.number,
-        specials: this.state.specials,
-        latitude: this.state.latitude,
-        longitude: this.state.longitude
+    const address = `${this.state.address} ${this.state.city}, ${this.state.state} ${this.state.zipcode}`
+    console.log("address", address)
+    return geocoder.geocode(address, (err, data) => {
+      if(data.status === "OK"){
+        data.results.forEach(result => {
+          const lat = result.geometry.location.lat;
+          const lng = result.geometry.location.lng;
+          console.log("latitude", lat)
+          this.setState({
+            latitude: lat,
+            longitude: lng,
+          })
+        })
+        const editVenueObj = {
+          venue_name: this.state.name,
+          address: this.state.address,
+          city: this.state.city,
+          state: this.state.state,
+          zipcode: this.state.zipcode,
+          phone_number: this.state.number,
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          specials: this.state.specials,
+        }
+        return fetch(`http://localhost:3000/venues/${this.state.venue.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(editVenueObj)
+        })
+        .then(res => res.json())
+        .then(json => console.log("json", json))
+      } else {
+        return alert("Address is invalid. Please try again!")
       }
-      return fetch(`http://localhost:3000/venues/${this.state.venue.venue_id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(editVenueObj)
-      })
-      .then(res => res.json())
-      .then(json => console.log(json))
-    }
-  return alert("The address you submited was not found please check again and resubmit the form")
-}
-
+    })
+  }
 
   render(){
     if(this.state.venue){
@@ -184,7 +183,7 @@ class Edit extends React.Component {
               <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number} />
             </Form.Field>
             {this.getSpecialsDetails(this.state.venue)}
-            <Button onSubmit={this.handleEditSubmit} type='submit'>Edit</Button>
+            <Button onClick={this.handleEditSubmit} type='submit'>Edit</Button>
           </Form>
         </div>
       )
