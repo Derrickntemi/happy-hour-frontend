@@ -17,6 +17,7 @@ class Edit extends React.Component {
     city: '',
     state: '',
     zipcode: '',
+    neighborhood: '',
     number: '',
     specials: [],
     latitude: '',
@@ -93,6 +94,7 @@ class Edit extends React.Component {
       city: venue.city,
       state: venue.state,
       zipcode: venue.zipcode,
+      neighborhood: venue.neighborhood,
       number: venue.phone_number,
       specials: venue.specials,
     })
@@ -132,6 +134,7 @@ class Edit extends React.Component {
           state: this.state.state,
           zipcode: this.state.zipcode,
           phone_number: this.state.number,
+          neighborhood: this.state.neighborhood,
           latitude: this.state.latitude,
           longitude: this.state.longitude,
           specials: this.state.specials,
@@ -180,7 +183,11 @@ class Edit extends React.Component {
                 <Form.Field>
                   <label>Zipcode</label>
                   <input onChange={(e) => this.handleInputChange("zipcode", e.target.value)} value={this.state.zipcode} />
+                </Form.Field><Form.Field>
+                  <label>Neighborhood</label>
+                  <input onChange={(e) => this.handleInputChange("neighborhood", e.target.value)} value={this.state.neighborhood} />
                 </Form.Field>
+
                 <Form.Field>
                   <label>Phone Number</label>
                   <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number} />
