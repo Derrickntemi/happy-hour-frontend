@@ -13,6 +13,13 @@ class HomeContainer extends Component {
   state = {
     dayInput: "",
     neighborhoodInput: "",
+    searchInput: "",
+  }
+
+  componentDidMount = () => {
+    if(this.props.lastVenueSearched.length){
+      this.props.setCurrentVenues(this.props.lastVenueSearched)
+    }
   }
 
   handleInputDayChange = (event, data) => {
@@ -27,16 +34,25 @@ class HomeContainer extends Component {
     })
   }
 
-  componentDidMount = () => {
-    if(this.props.lastVenueSearched.length){
-      this.props.setCurrentVenues(this.props.lastVenueSearched)
-      console.log("this.props.lastVenueSearched", this.props.lastVenueSearched)
+  handleSearchInput = (event) => {
+    this.setState({
+      searchInput: event.target.value
+    })
+  }
+
+  handleSearch = (event) => {
+    if(this.props.venues){
+      const searchedVenue = this.props.venues.filter(venue => {
+        return venue.venue_name.toLowerCase() === this.state.searchInput.toLowerCase()
+      })
+      this.props.setCurrentVenues(searchedVenue)
+    } else {
+      return alert("No venue matches that name, please add it below!")
     }
   }
 
   handleSubmit = () => {
     this.props.sortedByDayAndNeighborhood(this.state.dayInput, this.state.neighborhoodInput, this.props.venues)
-
   }
 
 
@@ -48,6 +64,18 @@ class HomeContainer extends Component {
             <Card className="search-form-card-wrapper">
               <Card.Content className="search-form-card">
                 <Form className="search-form-wrapper">
+                  <Form.Field>
+                    <label>Search for a Specific Bar</label>
+                    <input
+                      onChange={this.handleSearchInput} value={this.state.searchInput}
+                    />
+                  </Form.Field>
+                  <Button
+                    onClick={this.handleSearch}
+                    type='submit'
+                  >
+                    Search
+                  </Button>
                   <Form.Field  >
                     <label htmlFor="day" className="day-label">Day of the Week</label>
                     <Select
