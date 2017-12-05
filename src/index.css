@@ -3,6 +3,18 @@ body {
   padding: 0;
   font-family: sans-serif;
   background-color: #f3f0df;
+  color: #222626;
+}
+
+/* menu */
+
+.ui.menu {
+  background: #222626;
+  border-radius: 0;
+}
+
+.ui.item.header > a {
+  color: #F8BE00;
 }
 
 .google-map-wrapper {
@@ -23,17 +35,28 @@ body {
 
 .neighborhood-label {
   text-align: center;
-  background-color: #00b17c;
 }
 
 .day-label {
   text-align: center;
-  background-color: #00b17c;
 
 }
 
-.form-button {
-  align-items: center;
+.form-button-wrapper {
+  text-align: center;
+}
+
+.ui.button.form-button {
+  background: #0C618D;
+  color: #fff;
+}
+
+.ui.card.search-form-card-wrapper {
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+
 }
 
 /***** Map markers *****/
@@ -76,6 +99,15 @@ body {
   text-align: center;
 }
 
+/* Comment */
 .display-comment-div {
-  text-align: center;
+
+}
+
+.content {
+  padding: 16px;
+}
+
+.text {
+  padding-top: 8px;
 }

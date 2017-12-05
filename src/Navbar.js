@@ -13,14 +13,9 @@ export default class MenuExampleBasic extends Component {
 
     return (
       <Menu>
-        <Menu.Item className="ui center aligned header">Get Happy NYC</Menu.Item>
-        <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
-         >
-         <Link to="/">Home</Link>
+        <Menu.Item className="ui center aligned header">
+          <Link to="/" className="home-link">Get Happy NYC</Link>
         </Menu.Item>
-
       </Menu>
     )
   }

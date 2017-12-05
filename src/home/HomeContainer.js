@@ -45,7 +45,7 @@ class HomeContainer extends Component {
       <Grid className="form-wrapper" stackable columns={3} divided>
         <Grid.Row>
           <Grid.Column width={4}>
-            <Card >
+            <Card className="search-form-card-wrapper">
               <Card.Content className="search-form-card">
                 <Form className="search-form-wrapper">
                   <Form.Field  >
@@ -70,14 +70,21 @@ class HomeContainer extends Component {
                       options={neighborhoodOptions}
                     />
                   </Form.Field>
-                  <Button type="submit" onClick={this.handleSubmit} className="form-button">Search</Button >
+                  <div className="form-button-wrapper">
+                    <Button
+                      type="submit"
+                      onClick={this.handleSubmit} className="form-button"
+                    >
+                      Search
+                    </Button >
+                  </div>
                 </Form>
               </Card.Content>
             </Card>
             <Card>
-              <Card.Content>
+              <Button>
                 <Link to="/venues/create">Add a New Listing</Link>
-              </Card.Content>
+              </Button>
             </Card>
           </Grid.Column>
           <Grid.Column width={12}>

@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import geocoder from 'geocoder'
-import { Button, Form, Grid } from 'semantic-ui-react'
+import { Button, Form, Grid, Select } from 'semantic-ui-react'
+import { neighborhoodOptions } from '../helpers/selectOptions'
+
 
 
 
@@ -117,10 +119,16 @@ class Add extends React.Component {
                   <label>Zipcode</label>
                   <input onChange={(e) => this.handleInputChange("zipcode", e.target.value)} value={this.state.zipcode} />
                 </Form.Field>
+
                 <Form.Field>
                   <label>Neighborhood</label>
-                  <input onChange={(e) => this.handleInputChange("neighborhood", e.target.value)} value={this.state.neighborhood} />
+                  <Select
+                    onChange={(e) => this.handleInputChange("neighborhood", e.target.value)}
+                    value={this.state.neighborhood}
+                    options={neighborhoodOptions}
+                  />
                 </Form.Field>
+
                 <Form.Field>
                   <label>Phone Number</label>
                   <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number}/>
