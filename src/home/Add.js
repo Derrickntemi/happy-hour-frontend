@@ -42,6 +42,13 @@ class Add extends React.Component {
     })
   }
 
+
+  handleInputNeighborhoodChange = (event, data) => {
+    this.setState({
+      neighborhood: data.value
+    })
+  }
+
   handleAddSubmit = () => {
     const address = `${this.state.address} ${this.state.city}, ${this.state.state} ${this.state.zipcode}`
     console.log("address", address)
@@ -123,7 +130,7 @@ class Add extends React.Component {
                 <Form.Field>
                   <label>Neighborhood</label>
                   <Select
-                    onChange={(e) => this.handleInputChange("neighborhood", e.target.value)}
+                    onChange={this.handleInputNeighborhoodChange}
                     value={this.state.neighborhood}
                     options={neighborhoodOptions}
                   />
