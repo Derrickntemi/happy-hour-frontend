@@ -84,7 +84,7 @@ class Add extends React.Component {
           },
           body: JSON.stringify(addVenueObj)
         })
-        .then(json => console.log("json", json))
+        .then(window.location = "http://localhost:3001/")
       } else {
         return alert("Address is invalid. Please try again!")
       }

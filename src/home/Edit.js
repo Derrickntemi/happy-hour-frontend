@@ -148,7 +148,7 @@ class Edit extends React.Component {
           body: JSON.stringify(editVenueObj)
         })
         .then(res => res.json())
-        .then(json => console.log("json", json))
+        .then(window.location = "http://localhost:3001/")
       } else {
         return alert("Address is invalid. Please try again!")
       }

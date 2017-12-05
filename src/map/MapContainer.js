@@ -26,6 +26,7 @@ class MapContainer extends React.Component {
   }
 
   getAverageLatLng = (currentVenues) => {
+    console.log("getAverageLatLng", currentVenues)
     const latAverage = _.meanBy(currentVenues, venue => venue.latitude)
     const lngAverage = _.meanBy(currentVenues, venue => venue.longitude)
 
