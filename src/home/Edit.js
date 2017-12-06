@@ -24,21 +24,26 @@ class Edit extends React.Component {
     longitude: ''
   }
   getSpecialsDetails = (venue) => {
-    if(venue){
+    if(venue && !this.state.specials.length){
+      this.setState({
+        specials: [{day: "Monday", special: '', time: ''}, {day: "Tuesday", special: '', time: ''}, {day: "Wednesday", special: '', time: ''}, {day: "Thursday", special: '', time: ''}, {day: "Friday", special: '', time: ''}, {day: "Saturday", special: '', time: ''}, {day: "Sunday", special: '', time: ''}]
+      })
+    }
+    if(this.state.specials.length){
       return this.state.specials.map((special, idx) => {
         return(
           <div key={idx}>
-            <Form.Field >
-              <label>{special.day}&#39;s Special</label   >
-              <input onChange={(e) => this.handleSpecialChange(special.day, e)} value={special.special} />
-            </Form.Field>
-            <Form.Field>
-              <label>{special.day}&#39;s Happy Hour Time</label>
-              <input onChange={(e) => this.handleTimeChange(special.day, e)} value={special.time} />
-            </Form.Field>
+          <Form.Field >
+          <label>{special.day}&#39;s Special</label   >
+          <input onChange={(e) => this.handleSpecialChange(special.day, e)} value={special.special} />
+          </Form.Field>
+          <Form.Field>
+          <label>{special.day}&#39;s Happy Hour Time</label>
+          <input onChange={(e) => this.handleTimeChange(special.day, e)} value={special.time} />
+          </Form.Field>
           </div>
         )
-      })
+      })  
     }
   }
 
@@ -104,6 +109,7 @@ class Edit extends React.Component {
     if(this.props.venues.length > 0){
       this.setVenueData(this.props.match.params.id, this.props.venues)
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
