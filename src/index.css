@@ -60,6 +60,14 @@ a.home-link {
   margin-bottom: 8px;
 }
 
+.four.wide.column.column-with-search-and-add {
+    padding: 0;
+}
+
+.twelve.wide.column {
+    padding: 0;
+}
+
 .ui.button.search-by-name-button {
   background: #0C618D;
   color: #f3f0df;

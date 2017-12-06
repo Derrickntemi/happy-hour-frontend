@@ -6,12 +6,12 @@ import { findVenueById } from '../helpers/findVenueById'
 import { setCurrentVenues } from '../actions/venues.js'
 
 
-
+const DEFSPECIALS = [{day: "Sunday", special: "", time: ""}, {day: "Monday", special: "", time: "" }, {day: "Tuesday", special: "", time: ""}, {day: "Wednesday", special: "", time: ""}, {day: "Thursday", special: "", time: ""}, {day: "Friday", special: "", time: ""}, {day: "Saturday", special: "", time: ""}]
 
 class Edit extends React.Component {
 
   state = {
-    venue: null,
+    venueId: null,
     name: '',
     address: '',
     city: '',
@@ -19,39 +19,34 @@ class Edit extends React.Component {
     zipcode: '',
     neighborhood: '',
     number: '',
-    specials: [],
+    specials: [{day: "Sunday", special: "", time: ""}, {day: "Monday", special: "", time: "" }, {day: "Tuesday", special: "", time: ""}, {day: "Wednesday", special: "", time: ""}, {day: "Thursday", special: "", time: ""}, {day: "Friday", special: "", time: ""}, {day: "Saturday", special: "", time: ""}],
     latitude: '',
     longitude: ''
   }
-  getSpecialsDetails = (venue) => {
-    if(venue && !this.state.specials.length){
-      this.setState({
-        specials: [{day: "Monday", special: '', time: ''}, {day: "Tuesday", special: '', time: ''}, {day: "Wednesday", special: '', time: ''}, {day: "Thursday", special: '', time: ''}, {day: "Friday", special: '', time: ''}, {day: "Saturday", special: '', time: ''}, {day: "Sunday", special: '', time: ''}]
-      })
-    }
-    if(this.state.specials.length){
-      return this.state.specials.map((special, idx) => {
-        return(
-          <div key={idx}>
+
+
+  getSpecialsDetails = () => {
+    return this.state.specials.map((special, idx) => {
+      return (
+        <div key={idx}>
           <Form.Field >
-          <label>{special.day}&#39;s Special</label   >
-          <input onChange={(e) => this.handleSpecialChange(special.day, e)} value={special.special} />
+            <label>{special.day}&#39;s Special</label   >
+            <input type="text" onChange={(e) => this.handleSpecialChange(special.day, e)} value={special.special} />
           </Form.Field>
           <Form.Field>
-          <label>{special.day}&#39;s Happy Hour Time</label>
-          <input onChange={(e) => this.handleTimeChange(special.day, e)} value={special.time} />
+            <label>{special.day}&#39;s Happy Hour Time</label>
+            <input type="text" onChange={(e) => this.handleTimeChange(special.day, e)} value={special.time} />
           </Form.Field>
-          </div>
-        )
-      })  
-    }
+        </div>
+      )
+    })
+
   }
 
   handleTimeChange = (day, event) => {
-    console.log("day", day)
-    console.log("event", event)
-
-    if(this.state.venue.specials.length){
+    console.log("time change", event.target.value)
+    if(this.state.specials.length) {
+      console.log('POOP');
       const newTime = this.state.specials.map(special => {
         console.log("time", special.time)
         if(special.day === day){
@@ -68,7 +63,8 @@ class Edit extends React.Component {
   }
 
   handleSpecialChange = (day, event) => {
-    if(this.state.venue.specials.length){
+    console.log("special change", event.target.value)
+    if(this.state.specials.length){
       const newSpecials = this.state.specials.map(special => {
         if(special.day === day){
           return Object.assign({}, special, {special: event.target.value})
@@ -92,28 +88,38 @@ class Edit extends React.Component {
     const venue = findVenueById(parseInt(id, 10), venues)
     console.log("this venue", venue.id)
     this.props.setCurrentVenues([venue])
+
+    const updatedSpecials = this.state.specials.map(special => {
+      const specialToUpdate = venue.specials.find(sp => sp.day === special.day)
+      if (specialToUpdate) {
+        return specialToUpdate
+      } else {
+        return special
+      }
+    })
+
+
     this.setState({
-      venue: venue,
+      venueId: venue.id,
       name: venue.venue_name,
       address: venue.address,
       city: venue.city,
       state: venue.state,
       zipcode: venue.zipcode,
+      // specials: (venue.specials.length > 0) ? venue.specials : DEFSPECIALS,
+      specials: updatedSpecials,
       neighborhood: venue.neighborhood,
       number: venue.phone_number,
-      specials: venue.specials,
     })
   }
 
-  componentDidMount(){
-    if(this.props.venues.length > 0){
+  componentDidMount() {
+    if(this.props.venues.length > 0)
       this.setVenueData(this.props.match.params.id, this.props.venues)
-    }
-
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.venues.length > 0){
+    if(nextProps.venues.length > 0) {
       console.log("logged venues", nextProps.venues)
       this.setVenueData(this.props.match.params.id, nextProps.venues)
     }
@@ -145,7 +151,7 @@ class Edit extends React.Component {
           longitude: this.state.longitude,
           specials: this.state.specials,
         }
-        return fetch(`http://localhost:3000/venues/${this.state.venue.id}`, {
+        return fetch(`http://localhost:3000/venues/${this.state.venueId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -162,7 +168,7 @@ class Edit extends React.Component {
   }
 
   render(){
-    if(this.state.venue){
+    if(this.state.venueId){
       return(
         <Grid className="edit-listing-form">
           <Grid.Row>
@@ -198,7 +204,7 @@ class Edit extends React.Component {
                   <label>Phone Number</label>
                   <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number} />
                 </Form.Field>
-                {this.getSpecialsDetails(this.state.venue)}
+                {this.getSpecialsDetails()}
                 <Button onClick={this.handleEditSubmit} type='submit'>Edit</Button>
               </Form>
           </Grid.Column>
