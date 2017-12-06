@@ -5,7 +5,7 @@ import { findVenueById } from '../helpers/findVenueById'
 import MapContainer from '../map/MapContainer'
 import { setCurrentVenues } from '../actions/venues.js'
 import CommentContainer from '../comments/CommentContainer'
-import { Dimmer, Loader, Image, Segment, Grid } from 'semantic-ui-react'
+import { Dimmer, Loader, Image, Segment, Grid, Button } from 'semantic-ui-react'
 
 
 class ShowVenue extends React.Component {
@@ -56,7 +56,10 @@ class ShowVenue extends React.Component {
                 {this.state.venue.city}, {this.state.venue.state} {this.state.venue.zipcode}
               </h5>
               <h3>{this.state.venue.phone_number}</h3>
-              <Link to={`/venue/${this.state.venue.id}/edit`}>Edit this listing</Link>
+              <Button className="edit-listing-button">
+                <Link className="edit-new-listing-a"
+                 to={`/venue/${this.state.venue.id}/edit`}>Edit this listing</Link>
+              </Button>
           </div>
           <MapContainer />
           <Grid className="venue-specials-table-wrapper">

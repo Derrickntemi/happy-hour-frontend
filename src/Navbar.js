@@ -9,8 +9,6 @@ export default class MenuExampleBasic extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    const { activeItem } = this.state
-
     return (
       <Menu>
         <Menu.Item className="ui center aligned header">

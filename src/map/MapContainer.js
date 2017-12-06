@@ -2,6 +2,8 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react';
 import { Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
+
 import _ from 'lodash'
 import findDistance from '../helpers/findDistance.js'
 import { setCurrentVenues, setLastVenueSearched } from '../actions/venues.js'
@@ -9,12 +11,25 @@ import { Popup } from 'semantic-ui-react'
 
 
 const Marker = ({ venue }) => (
-  <Popup
-   className="marker-pop-up"
-   trigger={ <div className="pin1" />}
-   content={venue.venue_name}
-   on='hover'
- />
+  <div className="popup-wrapper">
+    <Popup
+     className="marker-pop-up"
+     trigger={ <div className="pin1" />}
+     on='click'
+    >
+      <Popup.Header className="popup-header">
+        <Link
+          to={`/venue/${venue.id}`}
+          className="popup-header-link"
+        >
+          {venue.venue_name}
+        </Link>
+      </Popup.Header>
+     <Popup.Content>
+        {venue.address}
+     </Popup.Content>
+    </Popup>
+  </div>
 );
 
 class MapContainer extends React.Component {
@@ -22,11 +37,9 @@ class MapContainer extends React.Component {
   state = {
     center: [40.74, -73.99],
     zoom: 12,
-    markerClicked: null
   }
 
   getAverageLatLng = (currentVenues) => {
-    console.log("getAverageLatLng", currentVenues)
     const latAverage = _.meanBy(currentVenues, venue => venue.latitude)
     const lngAverage = _.meanBy(currentVenues, venue => venue.longitude)
 
@@ -43,7 +56,6 @@ class MapContainer extends React.Component {
         center: [nextProps.userLocation[0], nextProps.userLocation[1]],
         zoom: 15
       })
-      console.log('venues', this.props.venues)
       const distanceArray = this.props.venues.map((venue, idx) => {
         const distance = findDistance(nextProps.userLocation[0], nextProps.userLocation[1], venue.latitude, venue.longitude)
         return Object.assign({}, venue, { distance: distance })
@@ -52,13 +64,9 @@ class MapContainer extends React.Component {
       const nearestVenues = sortedByDistance.slice(0, 20)
       this.props.setCurrentVenues(nearestVenues)
       this.props.setLastVenueSearched(nearestVenues)
-      console.log("nearest", this.props.lastVenueSearched)
-
     } else if(nextProps.currentVenues.length) {
       this.getAverageLatLng(nextProps.currentVenues)
       nextProps.setLastVenueSearched(nextProps.currentVenues)
-      console.log("searched venue", this.props.lastVenueSearched)
-
     }
   }
 

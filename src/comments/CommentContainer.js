@@ -51,25 +51,17 @@ class CommentContainer extends Component {
 
   render(){
     return(
-      <Grid className="comment-form-wrapper">
-        <Grid.Row>
-          <Grid.Column width={4}>
-          </Grid.Column>
-          <Grid.Column width={10}>
-            <Comment.Group>
-              <Header as='h3' dividing>Leave a Comment</Header>
-              <Form reply>
-                <Input placeholder="Your Name Here" onChange={this.handleNameChange} value={this.state.name}/>
-                <Form.TextArea onChange={this.handleCommentChange} value={this.state.comment}/>
-                <Button onClick={this.handleSubmitComment} content='Add Comment' labelPosition='left' icon='comment' primary />
-              </Form>
-              < CommentList id={this.state.id}/>
-            </Comment.Group>
-          </Grid.Column>
-          <Grid.Column width={2}>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Comment className="comment-form-wrapper">
+        <Comment.Group>
+          <Header as='h3' dividing>Leave a Comment</Header>
+          <Form reply>
+            <Input placeholder="Your Name Here" onChange={this.handleNameChange} value={this.state.name}/>
+            <Form.TextArea onChange={this.handleCommentChange} value={this.state.comment}/>
+            <Button onClick={this.handleSubmitComment} content='Add Comment' labelPosition='left' icon='comment' primary />
+          </Form>
+          < CommentList id={this.state.id}/>
+        </Comment.Group>
+      </Comment>
     )
   }
 }

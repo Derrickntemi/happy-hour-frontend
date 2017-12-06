@@ -22,7 +22,14 @@ class List extends React.Component {
       if (special) {
         return(
           <Table.Row key={idx}>
-            <Table.Cell><Link to={`/venue/${venue.id}`}>{venue.venue_name}</Link></Table.Cell>
+            <Table.Cell >
+              <Link
+                className="venue-names-links"
+                to={`/venue/${venue.id}`}
+              >
+                {venue.venue_name}
+              </Link>
+            </Table.Cell>
             <Table.Cell>{special.special}</Table.Cell>
             <Table.Cell>{special.time}</Table.Cell>
           </Table.Row>

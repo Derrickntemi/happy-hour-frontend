@@ -60,7 +60,7 @@ class HomeContainer extends Component {
     return (
       <Grid className="form-wrapper" stackable columns={3} divided>
         <Grid.Row>
-          <Grid.Column width={4}>
+          <Grid.Column width={4} className="column-with-search-and-add">
             <Card className="search-form-card-wrapper">
               <Card.Content className="search-form-card">
                 <Form className="search-form-wrapper">
@@ -70,12 +70,15 @@ class HomeContainer extends Component {
                       onChange={this.handleSearchInput} value={this.state.searchInput}
                     />
                   </Form.Field>
-                  <Button
-                    onClick={this.handleSearch}
-                    type='submit'
-                  >
-                    Search
-                  </Button>
+                  <div className="search-by-name-div">
+                    <Button
+                      onClick={this.handleSearch}
+                      type='submit'
+                      className="search-by-name-button"
+                    >
+                      Search
+                    </Button>
+                  </div>
                   <Form.Field  >
                     <label htmlFor="day" className="day-label">Day of the Week</label>
                     <Select
@@ -101,7 +104,8 @@ class HomeContainer extends Component {
                   <div className="form-button-wrapper">
                     <Button
                       type="submit"
-                      onClick={this.handleSubmit} className="form-button"
+                      onClick={this.handleSubmit}
+                      className="form-button"
                     >
                       Search
                     </Button >
@@ -109,11 +113,11 @@ class HomeContainer extends Component {
                 </Form>
               </Card.Content>
             </Card>
-            <Card>
-              <Button>
-                <Link to="/venues/create">Add a New Listing</Link>
+            <div className="add-new-button-wrapper">
+              <Button className="add-new-listing-button">
+                <Link className="add-new-listing-a" to="/venues/create">Add a New Listing</Link>
               </Button>
-            </Card>
+            </div>
           </Grid.Column>
           <Grid.Column width={12}>
             <MapContainer />
