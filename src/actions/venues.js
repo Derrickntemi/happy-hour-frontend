@@ -41,19 +41,21 @@ function fetchedVenues(venues) {
 }
 
 export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
+  console.log("allVenues", allVenues)
   return function(dispatch) {
     const sortedVenues = allVenues.filter((venue) => {
 
       return venue.neighborhood === neighborhood && !!venue.specials.find(special => {
         return special.day.toLowerCase() === day.toLowerCase()})
     })
+    console.log("sortedVenues", sortedVenues)
     if(sortedVenues.length < 1){
       const nonSortedVenues = allVenues.filter(venue => venue.neighborhood === neighborhood)
       dispatch(setCurrentVenues(nonSortedVenues))
       dispatch(setLastVenueSearched(nonSortedVenues))
     } else {
       dispatch(setCurrentVenues(sortedVenues))
-      dispatch(setLastVenueSearched(sortedVenues))  
+      dispatch(setLastVenueSearched(sortedVenues))
     }
     dispatch(setCurrentDay(day))
   }
