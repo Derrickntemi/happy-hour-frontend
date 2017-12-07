@@ -17,7 +17,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app-top-div">
         <Navbar />
         <Route exact path="/" component={HomeContainer} />
         <Route exact path="/venue/:id" component={ShowVenue} />

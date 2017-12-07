@@ -1,22 +1,35 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background-color: #f3f0df;
-  color: #222626;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f3eb;
+
+}
+
+.ui.table, body {
+  color: #232f3d;
+}
+
+.ui.table thead th {
+  background: #8FA3A8;
+  color: #fff;
+}
+
+.column {
+  box-shadow: none !important;
 }
 
 /************* MENU *************/
 
 .ui.menu {
-  background: #222626;
+  background: #232f3d;
   border-radius: 0;
 }
 
 a.home-link {
-  color: #F8BE00;
-  font-family: 'Shrikhand', cursive;
+  color: rgb(238, 84, 30);
   font-size: 36px;
+  font-weight: 100;
 }
 
 .google-map-wrapper {
@@ -51,8 +64,8 @@ a.home-link {
 }
 
 .ui.button.form-button {
-  background: #0C618D;
-  color: #f3f0df;
+  background: #5e818e;
+  color: #d3dadd;
 }
 
 .search-by-name-div {
@@ -69,12 +82,12 @@ a.home-link {
 }
 
 .ui.button.search-by-name-button {
-  background: #0C618D;
-  color: #f3f0df;
+  background: #5e818e;
+  color: #d3dadd;
 }
 
 .ui.button.add-new-listing-button {
-  background: #00b17c;
+  background: #232f3d;
   width: 75%;
   margin-top: 24px;
 }
@@ -84,7 +97,7 @@ a.home-link {
 }
 
 .add-new-listing-a {
-  color: #f3f0df;
+  color: #d3dadd;
 }
 
 .ui.card.search-form-card-wrapper {
@@ -111,7 +124,7 @@ a.home-link {
 /***** VENUES LIST *****/
 
 a.venue-names-links {
-  color: #0C618D;
+  color: #5e818e;
 }
 
 /***** Map markers *****/
@@ -120,7 +133,7 @@ a.venue-names-links {
   top: 40%;
   left: 50%;
   border-radius: 50% 50% 50% 0;
-  border: 3px solid #00B17C;
+  border: 3px solid #5e818e;
   width: 20px;
   height: 20px;
   transform: rotate(-45deg);
@@ -137,7 +150,7 @@ a.venue-names-links {
   left: 50%;
   margin-left: -5px;
   margin-top: -5px;
-  background-color: #F88E00;
+  background-color: rgb(238, 84, 30);
 }
 
 .marker-wrapper {
@@ -155,36 +168,55 @@ a.venue-names-links {
 }
 
 a.popup-header-link {
-  color: #00b17c;
+  color: #5e818e;
 }
 
 /***** EDIT FORM *****/
 
 .edit-form-heading {
   text-align: center;
-  color: #00b17c;
+  color: #8fa3a8;
 }
 
 .add-form-heading {
   text-align: center;
-  color: #00b17c;
+  color: #8fa3a8;
 }
 
 .venue-info-wrapper {
   text-align: center;
 }
 
+.ui.grid.venue-specials-table-wrapper {
+  margin-top: 32px;
+}
+
 .ui.button.edit-listing-button {
-  background: #00b17c;
+  background: #5e818e;
+  margin-bottom: 16px;
+}
+
+button.ui.button {
+    background: #5e818e;
+    color: #d3dadd;
 }
 
 a.edit-new-listing-a {
-  color: #f3f0df;
+  color: #d3dadd;
 }
 
 /* Comment */
 .display-comment-div {
 
+}
+
+h3.ui.dividing.header {
+    color: #5e818e;
+}
+
+button.ui.icon.primary.left.labeled.button {
+    background: #5e818e;
+    color: #d3dadd;
 }
 
 .ui.comments {

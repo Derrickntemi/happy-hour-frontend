@@ -12,7 +12,7 @@ export default class MenuExampleBasic extends Component {
     return (
       <Menu>
         <Menu.Item className="ui center aligned header">
-          <Link to="/" className="home-link">Get Happy NYC</Link>
+          <Link to="/" className="home-link">GetHappyNYC</Link>
         </Menu.Item>
       </Menu>
     )
