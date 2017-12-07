@@ -47,8 +47,14 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
       return venue.neighborhood === neighborhood && !!venue.specials.find(special => {
         return special.day.toLowerCase() === day.toLowerCase()})
     })
-    dispatch(setCurrentVenues(sortedVenues))
-    dispatch(setLastVenueSearched(sortedVenues))
+    if(sortedVenues.length < 1){
+      const nonSortedVenues = allVenues.filter(venue => venue.neighborhood === neighborhood)
+      dispatch(setCurrentVenues(nonSortedVenues))
+      dispatch(setLastVenueSearched(nonSortedVenues))
+    } else {
+      dispatch(setCurrentVenues(sortedVenues))
+      dispatch(setLastVenueSearched(sortedVenues))  
+    }
     dispatch(setCurrentDay(day))
   }
 }
