@@ -83,7 +83,7 @@ class Add extends React.Component {
             {day: "Saturday", special: this.state.saturday, time: this.state.saturdaysTime},
           ]
         }
-        return fetch("http://localhost:3000/venues", {
+        return fetch("https://happyhour-server.herokuapp.com/venues", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

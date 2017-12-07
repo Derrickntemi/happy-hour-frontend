@@ -151,7 +151,7 @@ class Edit extends React.Component {
           longitude: this.state.longitude,
           specials: this.state.specials,
         }
-        return fetch(`http://localhost:3000/venues/${this.state.venueId}`, {
+        return fetch(`https://happyhour-server.herokuapp.com/venues/${this.state.venueId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
