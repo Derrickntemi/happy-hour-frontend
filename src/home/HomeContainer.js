@@ -43,7 +43,7 @@ class HomeContainer extends Component {
   handleSearch = (event) => {
     if(this.props.venues){
       const searchedVenue = this.props.venues.filter(venue => {
-        return venue.venue_name.toLowerCase() === this.state.searchInput.toLowerCase()
+        return venue.venue_name.toLowerCase().includes(this.state.searchInput.toLowerCase())
       })
       this.props.setCurrentVenues(searchedVenue)
     } else {
