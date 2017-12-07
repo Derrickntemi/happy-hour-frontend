@@ -151,7 +151,7 @@ class Edit extends React.Component {
           longitude: this.state.longitude,
           specials: this.state.specials,
         }
-        return fetch(`http://localhost:3000/venues/${this.state.venueId}`, {
+        return fetch(`https://happyhour-server.herokuapp.com/venues/${this.state.venueId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -160,7 +160,7 @@ class Edit extends React.Component {
           body: JSON.stringify(editVenueObj)
         })
         .then(res => res.json())
-        .then(window.location = "http://localhost:3001/")
+        .then(window.location.pathname = "/")
       } else {
         return alert("Address is invalid. Please try again!")
       }

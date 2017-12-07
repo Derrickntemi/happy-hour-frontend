@@ -83,7 +83,7 @@ class Add extends React.Component {
             {day: "Saturday", special: this.state.saturday, time: this.state.saturdaysTime},
           ]
         }
-        return fetch("http://localhost:3000/venues", {
+        return fetch("https://happyhour-server.herokuapp.com/venues", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -91,7 +91,7 @@ class Add extends React.Component {
           },
           body: JSON.stringify(addVenueObj)
         })
-        .then(window.location = "http://localhost:3001/")
+        .then(window.location.pathname = "/")
       } else {
         return alert("Address is invalid. Please try again!")
       }
