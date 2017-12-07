@@ -2,12 +2,12 @@ export default class VenuesApi {
 
   static fetchVenues() {
     console.log("api call")
-    return fetch("http://localhost:3000/venues")
+    return fetch("https://happyhour-server.herokuapp.com/venues")
       .then(res => res.json())
   }
 
   static postComments(params) {
-    return fetch(`http://localhost:3000/venues/${params.venue_id}/comments`, {
+    return fetch(`https://happyhour-server.herokuapp.com/venues/${params.venue_id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export default class VenuesApi {
   }
 
   static fetchComments(id){
-    return fetch(`http://localhost:3000/venues/${id}/comments`)
+    return fetch(`https://happyhour-server.herokuapp.com/venues/${id}/comments`)
       .then(res => res.json())
   }
 }
