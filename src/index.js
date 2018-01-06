@@ -18,7 +18,7 @@ import './index.css';
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)))
 
-setLocation(store)
+// setLocation(store)
 
 
 ReactDOM.render(

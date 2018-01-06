@@ -49,13 +49,25 @@ class MapContainer extends React.Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
+// ************* pulled out setState into its own function to try and get live version to work ******************
 
-    if(nextProps.userLocation.length && !nextProps.currentVenues.length){
-      this.setState({
-        center: [nextProps.userLocation[0], nextProps.userLocation[1]],
-        zoom: 15
-      })
+  getUserLocation = (props) => {
+    console.log("props", props)
+    this.setState({
+      center: [this.props.userLocation[0], this.props.userLocation[1]],
+      zoom: 15
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.userLocation.length && nextProps.currentVenues.length === 0){
+      this.getUserLocation(nextProps)
+      console.log("next props", nextProps)
+
+      // this.setState({
+      //   center: [nextProps.userLocation[0], nextProps.userLocation[1]],
+      //   zoom: 15
+      // })
       const distanceArray = this.props.venues.map((venue, idx) => {
         const distance = findDistance(nextProps.userLocation[0], nextProps.userLocation[1], venue.latitude, venue.longitude)
         return Object.assign({}, venue, { distance: distance })

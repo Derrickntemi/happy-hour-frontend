@@ -19,6 +19,26 @@ export function fetchCommentsAction(id) {
   }
 }
 
+// ******trying to make an action to post a new venue ******
+
+export function postNewVenueAction(venue){
+  return function(dispatch) {
+    VenuesApi.postVenue(venue)
+      .then(venue => {
+        dispatch(addVenue(venue))
+      })
+  }
+}
+
+export function addVenue(venue) {
+  return({
+    type: "ADD_VENUE",
+    payload: venue
+  })
+}
+
+// *************************************************************
+
 export function addComment(comment) {
   return({
     type: "ADD_COMMENT",
@@ -62,6 +82,7 @@ export function sortedByDayAndNeighborhood(day, neighborhood, allVenues) {
 }
 
 export function setUserLocation(loc) {
+  console.log("setUserLocation")
   return function(dispatch) {
     dispatch({
       type: "SET_USER_LOCATION",

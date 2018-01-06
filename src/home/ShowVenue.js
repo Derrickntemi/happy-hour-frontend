@@ -8,7 +8,7 @@ import CommentContainer from '../comments/CommentContainer'
 import { Dimmer, Loader, Image, Segment, Grid, Button } from 'semantic-ui-react'
 
 
-class ShowVenue extends React.Component {
+export class ShowVenue extends React.Component {
 
   state = {
     venue: null,
@@ -50,7 +50,11 @@ class ShowVenue extends React.Component {
       return(
         <div>
           <div className="venue-info-wrapper">
-            <h1>{this.state.venue.venue_name}</h1>
+            <h1
+              className="venue-name-heading"
+            >
+              {this.state.venue.venue_name}
+            </h1>
               <h5>{this.state.venue.address}</h5>
               <h5>
                 {this.state.venue.city}, {this.state.venue.state} {this.state.venue.zipcode}

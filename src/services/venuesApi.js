@@ -21,4 +21,16 @@ export default class VenuesApi {
     return fetch(`http://localhost:3000/venues/${id}/comments`)
       .then(res => res.json())
   }
+
+  static postVenue(params) {
+    return fetch("http://localhost:3000/venues", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(params)
+    })
+    .then(window.location.pathname = "/")
+  }
 }

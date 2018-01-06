@@ -17,6 +17,8 @@ class HomeContainer extends Component {
   }
 
   componentDidMount = () => {
+
+
     if(this.props.lastVenueSearched.length){
       this.props.setCurrentVenues(this.props.lastVenueSearched)
     }

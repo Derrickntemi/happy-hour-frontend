@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import geocoder from 'geocoder'
 import { Button, Form, Grid, Select } from 'semantic-ui-react'
 import { neighborhoodOptions } from '../helpers/selectOptions'
+import { postNewVenueAction, addVenue } from '../actions/venues.js'
+import VenuesApi from "../services/venuesApi";
 
-
-
-
-
-class Add extends React.Component {
+export class Add extends React.Component {
 
   state = {
     name: '',
@@ -83,15 +81,9 @@ class Add extends React.Component {
             {day: "Saturday", special: this.state.saturday, time: this.state.saturdaysTime},
           ]
         }
-        return fetch("http://localhost:3000/venues", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify(addVenueObj)
-        })
-        .then(window.location.pathname = "/")
+        console.log("venue obj", addVenueObj)
+        return this.props.postNewVenueAction(addVenueObj)
+
       } else {
         return alert("Address is invalid. Please try again!")
       }
@@ -108,28 +100,49 @@ class Add extends React.Component {
             <Form><h1 className="add-form-heading">Add a New Happy Hour Spot!</h1>
               <Form.Field>
                 <label>Venue Name</label>
-                <input onChange={(e) => this.handleInputChange("name", e.target.value)} value={this.state.name} />
+                <input
+                  className="name-field"
+                  onChange={(e) => this.handleInputChange("name", e.target.value)}
+                  value={this.state.name}
+                />
               </Form.Field>
               <Form.Field>
                 <label>Venue Address</label>
-                <input onChange={(e) => this.handleInputChange("address", e.target.value)} value={this.state.address} />
+                <input
+                  className="address-field"
+                  onChange={(e) => this.handleInputChange("address", e.target.value)}
+                  value={this.state.address}
+                />
               </Form.Field>
               <Form.Field>
                 <label>City</label>
-                <input onChange={(e) => this.handleInputChange("city", e.target.value)} value={this.state.city} />
+                <input
+                  className="city-field"
+                  onChange={(e) => this.handleInputChange("city", e.target.value)}
+                  value={this.state.city}
+                />
                 </Form.Field>
                 <Form.Field>
                   <label>State</label>
-                  <input onChange={(e) => this.handleInputChange("state", e.target.value)} value={this.state.state}/>
+                  <input
+                    className="state-field"
+                    onChange={(e) => this.handleInputChange("state", e.target.value)}
+                    value={this.state.state}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Zipcode</label>
-                  <input onChange={(e) => this.handleInputChange("zipcode", e.target.value)} value={this.state.zipcode} />
+                  <input
+                    className="zipcode-field"
+                    onChange={(e) => this.handleInputChange("zipcode", e.target.value)}
+                    value={this.state.zipcode}
+                  />
                 </Form.Field>
 
                 <Form.Field>
                   <label>Neighborhood</label>
                   <Select
+                    className="neighborhood-field"
                     onChange={this.handleInputNeighborhoodChange}
                     value={this.state.neighborhood}
                     options={neighborhoodOptions}
@@ -138,66 +151,132 @@ class Add extends React.Component {
 
                 <Form.Field>
                   <label>Phone Number</label>
-                  <input onChange={(e) => this.handleInputChange("number", e.target.value)} value={this.state.number}/>
+                  <input
+                    className="phone-field"
+                    onChange={(e) => this.handleInputChange("number", e.target.value)}
+                    value={this.state.number}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Monday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("monday", e.target.value)} value={this.state.monday}/>
+                  <input
+                    className="monday-special-field"
+                    onChange={(e) => this.handleInputChange("monday", e.target.value)}
+                    value={this.state.monday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Monday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("mondaysTime", e.target.value)} value={this.state.mondaysTime}/>
+                  <input
+                    className="monday-time-field"
+                    onChange={(e) => this.handleInputChange("mondaysTime", e.target.value)}
+                    value={this.state.mondaysTime}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Tuesday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("tuesday", e.target.value)} value={this.state.tuesday}/>
+                  <input
+                    className="tuesday-special-field"
+                    onChange={(e) => this.handleInputChange("tuesday", e.target.value)}
+                    value={this.state.tuesday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Tuesday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("tuesdaysTime", e.target.value)} value={this.state.tuesdaysTime}/>
+                  <input
+                    className="tuesday-time-field"
+                    onChange={(e) => this.handleInputChange("tuesdaysTime", e.target.value)}
+                    value={this.state.tuesdaysTime}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Wednesday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("wednesday", e.target.value)} value={this.state.wednesday}/>
+                  <input
+                    className="wednesday-special-field"
+                    onChange={(e) => this.handleInputChange("wednesday", e.target.value)}
+                    value={this.state.wednesday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Wednesday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("wednesdaysTime", e.target.value)} value={this.state.wednesdaysTime}/>
+                  <input
+                    className="wednesday-time-field"
+                    onChange={(e) => this.handleInputChange("wednesdaysTime", e.target.value)}
+                    value={this.state.wednesdaysTime}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Thursday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("thursday", e.target.value)} value={this.state.thursday}/>
+                  <input
+                    className="thursday-special-field"
+                    onChange={(e) => this.handleInputChange("thursday", e.target.value)}
+                    value={this.state.thursday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Thursday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("thursdaysTime", e.target.value)} value={this.state.thursdaysTime}/>
+                  <input
+                    className="thursday-time-field"
+                    onChange={(e) => this.handleInputChange("thursdaysTime", e.target.value)}
+                    value={this.state.thursdaysTime}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Friday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("friday", e.target.value)} value={this.state.friday}/>
+                  <input
+                    className="friday-special-field"
+                    onChange={(e) => this.handleInputChange("friday", e.target.value)}
+                    value={this.state.friday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Friday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("fridaysTime", e.target.value)} value={this.state.fridaysTime}/>
+                  <input
+                    className="friday-time-field"
+                    onChange={(e) => this.handleInputChange("fridaysTime", e.target.value)}
+                    value={this.state.fridaysTime}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Saturday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("saturday", e.target.value)} value={this.state.saturday}/>
+                  <input
+                    className="saturday-special-field"
+                    onChange={(e) => this.handleInputChange("saturday", e.target.value)}
+                    value={this.state.saturday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Saturday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("saturdaysTime", e.target.value)} value={this.state.saturdaysTime}/>
+                  <input
+                    className="saturday-time-field"
+                    onChange={(e) => this.handleInputChange("saturdaysTime", e.target.value)}
+                    value={this.state.saturdaysTime}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Sunday&#39;s Special</label>
-                  <input onChange={(e) => this.handleInputChange("sunday", e.target.value)} value={this.state.sunday}/>
+                  <input
+                    className="sunday-special-field"
+                    onChange={(e) => this.handleInputChange("sunday", e.target.value)}
+                    value={this.state.sunday}
+                  />
                 </Form.Field>
                 <Form.Field>
                   <label>Sunday&#39;s Happy Hour Time</label>
-                  <input onChange={(e) => this.handleInputChange("sundaysTime", e.target.value)} value={this.state.sundaysTime}/>
+                  <input
+                    className="sunday-time-field"
+                    onChange={(e) => this.handleInputChange("sundaysTime", e.target.value)}
+                    value={this.state.sundaysTime}
+                  />
                 </Form.Field>
 
-                <Button onClick={this.handleAddSubmit} type='submit'>Add Happy Hour!</Button>
+                <Button
+                  className="submit-button"
+                  onClick={this.handleAddSubmit}
+                  type='submit'
+                >
+                  Add Happy Hour!
+                </Button>
             </Form>
           </Grid.Column>
           <Grid.Column width={2}>
@@ -208,11 +287,9 @@ class Add extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return ({
-    venues: state.venues,
-  })
+const mapDispatchToProps = {
+  postNewVenueAction,
+  addVenue
 }
 
-
-export default connect(mapStateToProps, null)(Add)
+export default connect(null, mapDispatchToProps)(Add)
