@@ -1,13 +1,17 @@
+const serverAddress = 'https://happyhour-server.herokuapp.com/venues'
+const localAddress = 'http://localhost:3000/venues'
+const currentAddress = serverAddress;
+
 export default class VenuesApi {
 
   static fetchVenues() {
     console.log("api call")
-    return fetch("http://localhost:3000/venues")
+    return fetch(currentAddress)
       .then(res => res.json())
   }
 
   static postComments(params) {
-    return fetch(`http://localhost:3000/venues/${params.venue_id}/comments`, {
+    return fetch(`${currentAddress}/${params.venue_id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,12 +22,12 @@ export default class VenuesApi {
   }
 
   static fetchComments(id){
-    return fetch(`http://localhost:3000/venues/${id}/comments`)
+    return fetch(`${currentAddress}/${id}/comments`)
       .then(res => res.json())
   }
 
   static postVenue(params) {
-    return fetch("http://localhost:3000/venues", {
+    return fetch(currentAddress, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
