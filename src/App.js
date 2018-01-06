@@ -21,7 +21,8 @@ class App extends Component {
     } else {
       alert("Geolocation is not supported by this browser.")
     }
-    this.props.fetchVenuesAction()   
+    
+    this.props.fetchVenuesAction()
   }
 
 
