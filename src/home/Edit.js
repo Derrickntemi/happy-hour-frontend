@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import geocoder from 'geocoder'
 import { Button, Form, Dimmer, Loader, Image, Segment, Grid } from 'semantic-ui-react'
 import { findVenueById } from '../helpers/findVenueById'
-import { setCurrentVenues } from '../actions/venues.js'
+import { setCurrentVenues, editVenueAction, editVenue } from '../actions/venues.js'
 
 
 const DEFSPECIALS = [{day: "Sunday", special: "", time: ""}, {day: "Monday", special: "", time: "" }, {day: "Tuesday", special: "", time: ""}, {day: "Wednesday", special: "", time: ""}, {day: "Thursday", special: "", time: ""}, {day: "Friday", special: "", time: ""}, {day: "Saturday", special: "", time: ""}]
@@ -151,17 +151,9 @@ class Edit extends React.Component {
           longitude: this.state.longitude,
           specials: this.state.specials,
         }
-        // TODO: abstract api to action file
-        return fetch(`https://happyhour-server.herokuapp.com/venues/${this.state.venueId}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify(editVenueObj)
-        })
-        .then(res => res.json())
-        .then(window.location.pathname = "/")
+        console.log("editVenueObj", editVenueObj)
+        return this.props.editVenueAction(editVenueObj)
+
       } else {
         return alert("Address is invalid. Please try again!")
       }
@@ -232,10 +224,16 @@ function mapStateToProps(state) {
   })
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return({
-    setCurrentVenues: (sortedVenues) => { dispatch(setCurrentVenues(sortedVenues)) }
-  })
+// const mapDispatchToProps = (dispatch) => {
+//   return({
+//     setCurrentVenues: (sortedVenues) => { dispatch(setCurrentVenues(sortedVenues)) }
+//   })
+// }
+
+const mapDispatchToProps = {
+  setCurrentVenues,
+  editVenueAction,
+  editVenue
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Edit)

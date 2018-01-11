@@ -20,14 +20,15 @@ export default function rootReducer(
     case "SET_CURRENT_COMMENTS":
       return (Object.assign({}, state, {currentComments: action.payload}))
     case "SET_USER_LOCATION":
-      console.log("reducer user location")
       return (Object.assign({}, state, {userLocation: action.payload}))
     case "ADD_COMMENT":
       return (Object.assign({}, state, {currentComments: state.currentComments.concat(action.payload)}))
     case "LAST_VENUE_SEARCHED":
       return (Object.assign({}, state, {lastVenueSearched: action.payload}))
     case "ADD_VENUE":
-      return (Object.assign({}. state, {addVenue: action.payload}))
+      return (Object.assign({}, state, {addVenue: action.payload}))
+    case "EDIT_VENUE":
+      return (Object.assign({}, state, {editVenue: action.payload}))
     default:
       return state;
   }
