@@ -19,6 +19,10 @@ body {
   box-shadow: none !important;
 }
 
+.current-location-loader {
+  
+}
+
 /************* MENU *************/
 
 .ui.menu {
@@ -128,6 +132,8 @@ a.venue-names-links {
 }
 
 /***** Map markers *****/
+
+
 .pin1 {
   position: absolute;
   top: 40%;

@@ -100,13 +100,13 @@ class MapContainer extends React.Component {
         >
         {
           this.props.currentVenues.length ?
-            this.outputMarkers() :
-            <Segment>
-              <Dimmer active inverted>
-                <Loader inverted>Finding Your Location</Loader>
-              </Dimmer>
-              <Image src='/assets/images/wireframe/short-paragraph.png' />
-            </Segment>
+            this.outputMarkers() : null
+            // <Segment className="current-location-loader">
+            //   <Dimmer active inverted>
+            //     <Loader inverted>Finding Your Location</Loader>
+            //   </Dimmer>
+            //   <Image src='/assets/images/wireframe/short-paragraph.png' />
+            // </Segment>
         }
         </GoogleMapReact>
       </Container>
