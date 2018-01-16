@@ -1,3 +1,5 @@
+console.log("move me to https you jerk!")
+
 {
   "root": "build/",
   "https_only": true
