@@ -9,11 +9,16 @@ Enjoy!
 
 Technologies:
 
-Rails
-React 
-react-dom 
-react-router-dom 
-react-redux 
+Rails, 
+
+React, 
+
+react-dom, 
+
+react-router-dom, 
+
+react-redux, 
+
 Semantic.ui
 
 This project was bootstrapped with Create React App.
