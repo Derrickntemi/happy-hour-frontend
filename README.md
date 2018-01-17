@@ -9,15 +9,15 @@ Enjoy!
 
 Technologies:
 
-Rails, 
+Rails
 
-React, 
+React 
 
-react-dom, 
+react-dom 
 
-react-router-dom, 
+react-router-dom 
 
-react-redux, 
+react-redux
 
 Semantic.ui
 
