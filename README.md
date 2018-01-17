@@ -7,12 +7,13 @@ The backend, built in Rails, can be found here: https://github.com/ndean87/happy
 
 Enjoy!
 
-Technologies
+Technologies:
+
 Rails
-React
-react-dom
-react-router-dom
-react-redux
+React 
+react-dom 
+react-router-dom 
+react-redux 
 Semantic.ui
 
 This project was bootstrapped with Create React App.
