@@ -37,4 +37,19 @@ export default class VenuesApi {
     })
     .then(window.location.pathname = "/")
   }
+
+  //TODO:: figure out how to pass venue id even though it is held in state by the edit.js component
+
+  static postEditVenue(params, id){
+    return fetch(`${currentAddress}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json())
+    .then(window.location.pathname = "/")
+  }
 }

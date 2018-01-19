@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash'
 import findDistance from '../helpers/findDistance.js'
 import { setCurrentVenues, setLastVenueSearched } from '../actions/venues.js'
-import { Popup } from 'semantic-ui-react'
+import { Popup, Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 
 const Marker = ({ venue }) => (
@@ -98,7 +98,16 @@ class MapContainer extends React.Component {
           center={this.state.center}
           zoom={this.state.zoom}
         >
-        {this.outputMarkers()}
+        {
+          this.props.currentVenues.length ?
+            this.outputMarkers() : null
+            // <Segment className="current-location-loader">
+            //   <Dimmer active inverted>
+            //     <Loader inverted>Finding Your Location</Loader>
+            //   </Dimmer>
+            //   <Image src='/assets/images/wireframe/short-paragraph.png' />
+            // </Segment>
+        }
         </GoogleMapReact>
       </Container>
     );

@@ -21,12 +21,16 @@ class App extends Component {
     } else {
       alert("Geolocation is not supported by this browser.")
     }
-    
+
     this.props.fetchVenuesAction()
   }
 
 
   render() {
+    if(window.location.protocol !== "https:"){
+      window.location.href = "https:" + window.location.href.substring(window.location.protocol.length)
+      alert("you are being redirected to a secure address")
+    }
     return (
       <div className="app-top-div">
         <Navbar />
