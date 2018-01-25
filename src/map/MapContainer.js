@@ -88,6 +88,21 @@ class MapContainer extends React.Component {
     })
   }
 
+  loadingIcon = () => {
+    if(this.props.userLocation.length){
+      this.setState({
+        isLoading: true,
+      })
+    } else {
+      <Segment className="current-location-loader">
+        <Dimmer active inverted>
+          <Loader inverted>Finding Your Location</Loader>
+        </Dimmer>
+        <Image src='/assets/images/wireframe/short-paragraph.png' />
+      </Segment>
+    }
+  }
+
   render() {
     return (
       <Container fluid className="google-map-wrapper">
@@ -98,17 +113,21 @@ class MapContainer extends React.Component {
           center={this.state.center}
           zoom={this.state.zoom}
         >
-        {
-          this.props.currentVenues.length ?
-            this.outputMarkers() : null
-            // <Segment className="current-location-loader">
-            //   <Dimmer active inverted>
-            //     <Loader inverted>Finding Your Location</Loader>
-            //   </Dimmer>
-            //   <Image src='/assets/images/wireframe/short-paragraph.png' />
-            // </Segment>
+        { this.outputMarkers() }
+      </GoogleMapReact>
+        {this.props.isLoading ?
+          <div className="loader-div">
+            <Loader
+              active
+              inline='centered'
+              size='medium'
+              className="current-location-loader"
+            >
+              Finding Your Location
+            </Loader>
+          </div>
+          : null
         }
-        </GoogleMapReact>
       </Container>
     );
   }
@@ -119,7 +138,8 @@ function mapStateToProps(state) {
     currentVenues: state.currentVenues,
     venues: state.venues,
     userLocation: state.userLocation,
-    lastVenueSearched: state.lastVenueSearched
+    lastVenueSearched: state.lastVenueSearched,
+    isLoading: state.isLoading
 
   }
 }

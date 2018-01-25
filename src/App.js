@@ -6,30 +6,32 @@ import Navbar from './Navbar'
 import ShowVenue from './home/ShowVenue'
 import Edit from './home/Edit.js'
 import Add from './home/Add.js'
-// import { setLocation } from './map/Geolocation'
-import { fetchVenuesAction, setUserLocation } from './actions/venues.js'
+import { fetchVenuesAction, setUserLocation, setIsLoading } from './actions/venues.js'
 
 class App extends Component {
 
 
   componentDidMount = () => {
     if(navigator.geolocation){
+      this.props.setIsLoading(true)
       navigator.geolocation.getCurrentPosition((pos) => {
         console.log("position", pos)
         this.props.setUserLocation([pos.coords.latitude, pos.coords.longitude])
+        this.props.setIsLoading(false)
       })
     } else {
       alert("Geolocation is not supported by this browser.")
     }
 
     this.props.fetchVenuesAction()
+
   }
 
 
   render() {
     if(window.location.protocol !== "https:"){
       window.location.href = "https:" + window.location.href.substring(window.location.protocol.length)
-      alert("you are being redirected to a secure address")
+      alert("You are being redirected to a secure address")
     }
     return (
       <div className="app-top-div">
@@ -45,7 +47,8 @@ class App extends Component {
 
 const mapDispatchToProps = {
   fetchVenuesAction,
-  setUserLocation
+  setUserLocation,
+  setIsLoading
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(App))

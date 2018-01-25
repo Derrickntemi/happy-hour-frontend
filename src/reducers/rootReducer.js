@@ -21,12 +21,14 @@ export default function rootReducer(
       return (Object.assign({}, state, {currentComments: action.payload}))
     case "SET_USER_LOCATION":
       return (Object.assign({}, state, {userLocation: action.payload}))
+    case "SET_IS_LOADING":
+      return (Object.assign({}, state, {isLoading: action.payload}))
     case "ADD_COMMENT":
       return (Object.assign({}, state, {currentComments: state.currentComments.concat(action.payload)}))
     case "LAST_VENUE_SEARCHED":
       return (Object.assign({}, state, {lastVenueSearched: action.payload}))
     case "ADD_VENUE":
-      return (Object.assign({}, state, {addVenue: action.payload}))
+      return (Object.assign({}, state, {addVenue: state.addVenue.concat(action.payload)}))
     case "EDIT_VENUE":
       return (Object.assign({}, state, {editVenue: action.payload}))
     default:

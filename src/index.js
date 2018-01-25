@@ -9,7 +9,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import rootReducer from "./reducers/rootReducer";
-import { setLocation } from './map/Geolocation'
 
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
@@ -18,7 +17,6 @@ import './index.css';
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)))
 
-// setLocation(store)
 
 
 ReactDOM.render(

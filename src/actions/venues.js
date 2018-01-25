@@ -108,6 +108,15 @@ export function setUserLocation(loc) {
   }
 }
 
+export function setIsLoading(loading){
+  return function(dispatch){
+    dispatch({
+      type: "SET_IS_LOADING",
+      payload: loading
+    })
+  }
+}
+
 export function setCurrentVenues(sortedVenues) {
   return {
     type: "SET_CURRENT_VENUES",
