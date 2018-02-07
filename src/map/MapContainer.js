@@ -50,7 +50,7 @@ class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.userLocation.length && nextProps.currentVenues.length === 0 && this.props.venues.length){
+    if(nextProps.userLocation.length && nextProps.currentVenues.length === 0 && nextProps.venues.length){
       this.setState({
         center: [nextProps.userLocation[0], nextProps.userLocation[1]],
         zoom: 15

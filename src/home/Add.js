@@ -51,7 +51,7 @@ export class Add extends React.Component {
     const address = `${this.state.address} ${this.state.city}, ${this.state.state} ${this.state.zipcode}`
     console.log("address", address)
     return geocoder.geocode(address, (err, data) => {
-      if(data.status === "OK"){
+      if(data && data.status === "OK"){
         data.results.forEach(result => {
           const lat = result.geometry.location.lat;
           const lng = result.geometry.location.lng;

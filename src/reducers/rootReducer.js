@@ -28,7 +28,7 @@ export default function rootReducer(
     case "LAST_VENUE_SEARCHED":
       return (Object.assign({}, state, {lastVenueSearched: action.payload}))
     case "ADD_VENUE":
-      return (Object.assign({}, state, {addVenue: state.addVenue.concat(action.payload)}))
+      return (Object.assign({}, state, {venues: state.venues.concat(action.payload)}))
     case "EDIT_VENUE":
       return (Object.assign({}, state, {editVenue: action.payload}))
     default:

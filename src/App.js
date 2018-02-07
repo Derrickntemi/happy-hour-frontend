@@ -29,10 +29,10 @@ class App extends Component {
 
 
   render() {
-    if(window.location.protocol !== "https:"){
-      window.location.href = "https:" + window.location.href.substring(window.location.protocol.length)
-      alert("You are being redirected to a secure address")
-    }
+    // if(window.location.protocol !== "https:"){
+    //   window.location.href = "https:" + window.location.href.substring(window.location.protocol.length)
+    //   alert("You are being redirected to a secure address")
+    // }
     return (
       <div className="app-top-div">
         <Navbar />
